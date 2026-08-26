@@ -8,6 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
     tailwind.config = {
       theme: {
@@ -32,17 +34,17 @@
 
   <!-- Header -->
   <header class="bg-brand-600 text-white shadow-md">
-    <div class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <!-- Top Panel Header Branding -->
       <div class="flex items-center space-x-3">
-        <div class="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-          <i data-lucide="plane-takeoff" class="w-6 h-6"></i>
-        </div>
         <div>
-          <h1 class="text-2xl font-bold tracking-tight">VoyageSpend</h1>
-          <p class="text-xs text-brand-100 font-medium">
-            Welcome, <span id="userDisplayName" class="font-bold underline capitalize">User</span>!
-          </p>
+          <h1 class="text-2xl font-black tracking-tight leading-none">BcKET</h1>
+          <p class="text-xs text-brand-100 font-medium tracking-wide mt-0.5">Travel Expense & Budget Tracker</p>
         </div>
+        <div class="h-6 w-px bg-brand-500 mx-2 hidden sm:block"></div>
+        <p class="text-xs text-brand-100 font-medium hidden sm:block">
+          Welcome, <span id="userDisplayName" class="font-bold underline capitalize">User</span>!
+        </p>
       </div>
       <div class="flex items-center gap-2">
         <button id="switchUserBtn" class="text-xs bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg transition">
@@ -57,25 +59,7 @@
 
   <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
 
-    <!-- Dynamic Itinerary Section -->
-    <section id="itinerarySection" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-6">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 gap-2">
-        <div>
-          <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-            <i data-lucide="map-pin" class="w-5 h-5 text-brand-600"></i> Multi-Day Curated Itinerary
-          </h2>
-          <p id="itinerarySubtitle" class="text-xs text-slate-500 font-medium mt-0.5"></p>
-        </div>
-        <span id="dailyBudgetBadge" class="bg-brand-50 text-brand-700 border border-brand-200 text-xs font-semibold px-3 py-1 rounded-full"></span>
-      </div>
-
-      <!-- Dynamic Cards Grid -->
-      <div id="itineraryCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Dynamically Populated -->
-      </div>
-    </section>
-
-    <!-- Main Expense Tracker Layout -->
+    <!-- 1. Expense Tracker Main Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       
       <!-- Form Input -->
@@ -195,1084 +179,340 @@
 
       </div>
     </div>
+
+    <!-- Hero Banner -->
+    <section id="hero" class="relative bg-slate-900 text-white py-16 px-6 rounded-2xl overflow-hidden shadow-lg border border-slate-800">
+      <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="relative max-w-3xl mx-auto text-center space-y-4">
+        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">Discover Your Next Big Adventure</h2>
+        <p class="text-base md:text-lg text-slate-200">Customized itineraries, hidden gems, and seamless planning all in one place.</p>
+      </div>
+    </section>
+
+    <!-- 2. Dynamic Itinerary Section -->
+    <section id="itinerarySection" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 gap-2">
+        <div>
+          <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-5 h-5 text-brand-600"></i> Multi-Day Curated Itinerary
+          </h2>
+          <p id="itinerarySubtitle" class="text-xs text-slate-500 font-medium mt-0.5"></p>
+        </div>
+        <span id="dailyBudgetBadge" class="bg-brand-50 text-brand-700 border border-brand-200 text-xs font-semibold px-3 py-1 rounded-full"></span>
+      </div>
+
+      <!-- Dynamic Cards Grid -->
+      <div id="itineraryCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamically Populated via JS -->
+      </div>
+    </section>
+
+    <!-- 3. Trending Destinations Section -->
+    <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-5 h-5 text-brand-600"></i> Trending Destinations
+          </h2>
+          <p class="text-xs text-slate-500 font-medium">Popular locations tailored for Indian travelers</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
+        
+        <!-- Delhi -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=400&q=80" alt="Delhi" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Delhi</p>
+            <span class="text-[10px] text-slate-500">Heritage</span>
+          </div>
+        </div>
+
+        <!-- Mumbai -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=400&q=80" alt="Mumbai" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Mumbai</p>
+            <span class="text-[10px] text-slate-500">Coastal</span>
+          </div>
+        </div>
+
+        <!-- Bengaluru -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=400&q=80" alt="Bengaluru" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Bengaluru</p>
+            <span class="text-[10px] text-slate-500">Gardens</span>
+          </div>
+        </div>
+
+        <!-- Kolkata -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=400&q=80" alt="Kolkata" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Kolkata</p>
+            <span class="text-[10px] text-slate-500">Culture</span>
+          </div>
+        </div>
+
+        <!-- Chennai -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80" alt="Chennai" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Chennai</p>
+            <span class="text-[10px] text-slate-500">Temples</span>
+          </div>
+        </div>
+
+        <!-- Hyderabad -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=400&q=80" alt="Hyderabad" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Hyderabad</p>
+            <span class="text-[10px] text-slate-500">Royalty</span>
+          </div>
+        </div>
+
+        <!-- Ahmedabad -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=400&q=80" alt="Ahmedabad" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Ahmedabad</p>
+            <span class="text-[10px] text-slate-500">Heritage</span>
+          </div>
+        </div>
+
+        <!-- Pune -->
+        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
+          <div class="h-24 w-full overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=400&q=80" alt="Pune" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+          </div>
+          <div class="p-2.5 text-center">
+            <p class="text-xs font-bold text-slate-800">Pune</p>
+            <span class="text-[10px] text-slate-500">Forts & Arts</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <script>
-    // ------------------------------------------------------------------
-    // EXPANDED CITY DATABASE WITH ACCURATE IMAGES & UNTRUNCATED TEXT
-    // ------------------------------------------------------------------
     const CITY_DATABASE = {
       "Delhi": [
-        { 
-          name: "Red Fort & Old Delhi", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1597040639427-419165365a49?w=500&auto=format&fit=crop", 
-          desc: "Explore Shah Jahan's historic red sandstone fortress and Lahori Gate before diving into the bustling spice alleys of Chandni Chowk." 
-        },
-        { 
-          name: "Humayun's Tomb", 
-          entry: 40, 
-          img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", 
-          desc: "Walk through tranquil Persian-style Charbagh gardens surrounding this UNESCO World Heritage red sandstone and marble precursor to the Taj Mahal." 
-        },
-        { 
-          name: "India Gate & Kartavya Path", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1608459469599-e655074251ad?w=500&auto=format&fit=crop", 
-          desc: "Stroll along the sprawling national ceremonial boulevard to admire the 42-meter war memorial arch illuminated brightly under the evening sky." 
-        },
-        { 
-          name: "Qutub Minar Complex", 
-          entry: 40, 
-          img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500&auto=format&fit=crop", 
-          desc: "Marvel at the world's tallest brick minaret, built in 1192, and inspect the rust-resistant 1,600-year-old ancient Iron Pillar of Delhi." 
-        },
-        { 
-          name: "Lotus Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=500&auto=format&fit=crop", 
-          desc: "Experience serene silent meditation inside this modern lotus-flower shaped Bahá'í House of Worship crafted from pure white Greek marble." 
-        },
-        { 
-          name: "Akshardham Water Show", 
-          entry: 90, 
-          img: "https://images.unsplash.com/photo-1627894006066-b45785055b8e?w=500&auto=format&fit=crop", 
-          desc: "Witness the spectacular Sahaj Anand water display combining colorful lasers, underwater flames, water jets, and live actors after dark." 
-        },
-        { 
-          name: "Lodhi Art District", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?w=500&auto=format&fit=crop", 
-          desc: "India's first open-air public art gallery featuring larger-than-life wall murals painted by world-renowned street artists across government quarters." 
-        },
-        { 
-          name: "Jama Masjid", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&auto=format&fit=crop", 
-          desc: "Ascend the minaret of India's iconic 17th-century congregational mosque to enjoy sweeping panoramic vistas over Old Delhi's rooftops." 
-        },
-        { 
-          name: "Hauz Khas Village & Lake", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop", 
-          desc: "A unique blend of 14th-century Delhi Sultanate ruins, scenic lake reservoirs, and trendy urban art cafes and boutiques." 
-        },
-        { 
-          name: "National Museum", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", 
-          desc: "Discover over 200,000 historic treasures ranging from Harappan 'Dancing Girl' bronzes to ancient Buddhist relics and royal armor." 
-        },
-        { 
-          name: "Agrasen ki Baoli", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Descend into a fascinating 108-step historic stepwell hidden in central Connaught Place, renowned for its architectural grandeur." 
-        },
-        { 
-          name: "Garden of Five Senses", 
-          entry: 35, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Relax in a 20-acre landscaped sensory park featuring bamboo courts, fragrant flower gardens, stone carvings, and solar power displays." 
-        },
-        { 
-          name: "National Zoological Park", 
-          entry: 80, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Walk through 176 acres of greenery housing white tigers, Asiatic lions, brow-antlered deer, and diverse migratory bird species." 
-        },
-        { 
-          name: "Sundar Nursery", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Stroll through a restored 16th-century heritage park featuring marble lotus fountains, micro-habitat zones, and Mughal monuments." 
-        },
-        { 
-          name: "Safdarjung Tomb", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", 
-          desc: "Explore the last monumental tomb-garden of Mughal architecture, built in 1754 with red sandstone and ornate plasterwork." 
-        },
-        { 
-          name: "Crafts Museum (Hastkala Academy)", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", 
-          desc: "Discover village courtyards, rural tribal shrines, traditional wooden carving displays, and live artisan demonstrations." 
-        },
-        { 
-          name: "National Gallery of Modern Art", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=500&auto=format&fit=crop", 
-          desc: "Browse modern Indian art collections including iconic paintings by Amrita Sher-Gil, Raja Ravi Varma, and Rabindranath Tagore." 
-        },
-        { 
-          name: "Jantar Mantar", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Inspect 13 architectural astronomy instruments built by Maharaja Jai Singh II in 1724 to compile astronomical tables." 
-        },
-        { 
-          name: "Purana Qila (Old Fort)", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500&auto=format&fit=crop", 
-          desc: "Walk through massive 16th-century stone ramparts built by Sher Shah Suri and enjoy evening light and sound shows." 
-        },
-        { 
-          name: "Rail Museum (National Rail Museum)", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&auto=format&fit=crop", 
-          desc: "Ride a vintage toy train amidst historic royal saloons, steam locomotives, and interactive indoor railway exhibits." 
-        },
-        { 
-          name: "Waste to Wonder Park", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", 
-          desc: "See replicas of the Seven Wonders of the World constructed completely out of industrial scrap material and metal waste." 
-        },
-        { 
-          name: "Lotus Garden & ISKCON Delhi", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Visit the hilltop spiritual complex featuring Vedic cultural museums, light performances, and quiet meditation halls." 
-        }
+        { name: "Red Fort & Old Delhi", entry: 50, img: "https://images.unsplash.com/photo-1597040639427-419165365a49?w=500&auto=format&fit=crop", desc: "Explore Shah Jahan's historic red sandstone fortress and Chandni Chowk." },
+        { name: "Humayun's Tomb", entry: 40, img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", desc: "Walk through Persian-style Charbagh gardens surrounding this UNESCO heritage site." },
+        { name: "India Gate & Kartavya Path", entry: 0, img: "https://images.unsplash.com/photo-1608459469599-e655074251ad?w=500&auto=format&fit=crop", desc: "Stroll along the sprawling national ceremonial boulevard to admire the war memorial." },
+        { name: "Qutub Minar Complex", entry: 40, img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500&auto=format&fit=crop", desc: "Marvel at the world's tallest brick minaret and ancient Iron Pillar of Delhi." },
+        { name: "Lotus Temple", entry: 0, img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=500&auto=format&fit=crop", desc: "Experience serene silent meditation inside this lotus-flower shaped Bahá'í House of Worship." },
+        { name: "Akshardham Water Show", entry: 90, img: "https://images.unsplash.com/photo-1627894006066-b45785055b8e?w=500&auto=format&fit=crop", desc: "Witness the spectacular Sahaj Anand water display with lasers and lights." },
+        { name: "Lodhi Art District", entry: 0, img: "https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?w=500&auto=format&fit=crop", desc: "Open-air public art gallery featuring larger-than-life murals by global street artists." },
+        { name: "Jama Masjid", entry: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&auto=format&fit=crop", desc: "Ascend the minaret of India's iconic 17th-century congregational mosque." },
+        { name: "Hauz Khas Village & Lake", entry: 0, img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop", desc: "A blend of 14th-century Delhi Sultanate ruins, scenic reservoirs, and cafes." },
+        { name: "National Museum", entry: 20, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Discover over 200,000 historic treasures ranging from Harappan bronze to Buddhist relics." },
+        { name: "Agrasen ki Baoli", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Descend into a fascinating 108-step historic stepwell hidden in Connaught Place." },
+        { name: "Garden of Five Senses", entry: 35, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Relax in a 20-acre sensory park featuring bamboo courts and fragrant flower gardens." },
+        // 10 Added Places:
+        { name: "National Gallery of Modern Art", entry: 20, img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500&auto=format&fit=crop", desc: "View premier collections of modern Indian painting, sculptures, and installations." },
+        { name: "Crafts Museum Pragati Maidan", entry: 20, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "Explore rural village huts, live artisan demonstrations, and rare traditional crafts." },
+        { name: "Sunder Nursery Heritage Park", entry: 50, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "A restored 90-acre Mughal-era heritage park boasting 6 UNESCO World Heritage monuments." },
+        { name: "Safdarjung Tomb", entry: 25, img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", desc: "Admire the late Mughal red sandstone garden tomb constructed in 1754." },
+        { name: "Gurudwara Bangla Sahib", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Visit the iconic golden-domed Sikh shrine with a sacred reflection pool and community kitchen." },
+        { name: "Chhatarpur Temple Complex", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Sprawling 70-acre South Indian and North Indian style marble temple sanctuary." },
+        { name: "Purana Qila & Boat Ride", entry: 30, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Walk ancient stone fort walls of Sher Shah Suri and enjoy scenic boating on the moat." },
+        { name: "Janpath & State Emporiums", entry: 0, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop", desc: "Shop authentic handicrafts, carpets, and textiles direct from government state stalls." },
+        { name: "Asola Bhatti Wildlife Sanctuary", entry: 100, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Trek through Arvalli hill forests to discover hidden turquoise blue mining lakes." },
+        { name: "Waste to Wonder Park", entry: 50, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Marvel at replica sculptures of Seven Wonders built entirely out of scrap industrial waste." }
       ],
       "Mumbai": [
-        { 
-          name: "Gateway of India", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop", 
-          desc: "Stand before the grand 26-meter basalt arch overlooking the Arabian Sea, built to commemorate King George V's royal visit." 
-        },
-        { 
-          name: "Marine Drive Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop", 
-          desc: "Stroll along the 3.6-kilometer seaside C-shaped promenade, affectionately called the 'Queen’s Necklace' due to its sparkling night lights." 
-        },
-        { 
-          name: "Juhu Beach Street Food", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Soak in coastal sunset views while savoring spicy Mumbai street food favorites like Pav Bhaji, Bhel Puri, and Kulfi." 
-        },
-        { 
-          name: "Elephanta Caves Ferry", 
-          entry: 260, 
-          img: "https://images.unsplash.com/photo-1626014903708-ec902094c3d2?w=500&auto=format&fit=crop", 
-          desc: "Take a scenic 1-hour ferry trip to inspect 5th-century rock-cut cave temples dedicated to Lord Shiva on Elephanta Island." 
-        },
-        { 
-          name: "Chhatrapati Shivaji Terminus", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1572205336203-02f8373b9e40?w=500&auto=format&fit=crop", 
-          desc: "Admire the Victorian Gothic UNESCO World Heritage train station featuring ornate stone domes, vaults, and gargoyles." 
-        },
-        { 
-          name: "Bandra Fort & Sea Link", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1595658658421-a9ac457190ca?w=500&auto=format&fit=crop", 
-          desc: "Watch waves crash against 17th-century Portuguese ruins with breathtaking panoramic views of the Bandra-Worli Sea Link cable bridge." 
-        },
-        { 
-          name: "Sanjay Gandhi National Park", 
-          entry: 85, 
-          img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", 
-          desc: "Explore a sprawling urban rainforest right within city limits and visit the ancient rock-cut Kanheri Buddhist Caves." 
-        },
-        { 
-          name: "Chhatrapati Shivaji Museum", 
-          entry: 150, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Browse through an exquisite Indo-Saracenic building displaying over 50,000 rare artifacts, miniaturist paintings, and ancient weapons." 
-        },
-        { 
-          name: "Haji Ali Dargah", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=500&auto=format&fit=crop", 
-          desc: "Walk across a narrow causeway during low tide to visit this famous 15th-century Indo-Islamic shrine floating in the sea." 
-        },
-        { 
-          name: "Colaba Causeway Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Bargain for vintage jewelry, handicrafts, and clothes in Mumbai's most vibrant outdoor shopping street." 
-        },
-        { 
-          name: "Global Vipassana Pagoda", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=500&auto=format&fit=crop", 
-          desc: "Visit the world's largest pillarless stone dome built in Gorai as a monument of peace and meditation." 
-        },
-        { 
-          name: "Taraporewala Aquarium", 
-          entry: 60, 
-          img: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&auto=format&fit=crop", 
-          desc: "India's oldest aquarium featuring a 12-foot 180-degree glass acrylic tunnel filled with rare marine life." 
-        },
-        { 
-          name: "Nehru Planetarium & Centre", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Watch high-definition 3D astronomy dome shows and explore interactive space science exhibits in Worli." 
-        },
-        { 
-          name: "Siddhivinayak Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Visit Prabhadevi's famous 1801 grand temple dedicated to Lord Ganesha, featuring a gold-plated inner sanctum dome." 
-        },
-        { 
-          name: "Kanheri Caves", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Explore over 100 Buddhist rock-cut caves carved into basalt hills dating back from the 1st century BCE to 10th century CE." 
-        },
-        { 
-          name: "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya Gardens", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Relax in landscaped palm gardens surrounding classic Indo-Saracenic museum architecture in South Mumbai." 
-        },
-        { 
-          name: "Dr. Bhau Daji Lad Museum", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", 
-          desc: "Mumbai's oldest museum displaying 19th-century decorative arts, maps, dioramas, and industrial craft heritage." 
-        },
-        { 
-          name: "Worli Fort", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1595658658421-a9ac457190ca?w=500&auto=format&fit=crop", 
-          desc: "Look out over the fishing village harbor and Bandra-Worli Sea Link from a 1675 British-built coastal watchtower." 
-        },
-        { 
-          name: "Manori Beach & Ferry", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Take a short jetty ferry to quiet sandy beaches lined with coconut groves and seaside Portuguese-style village cottages." 
-        },
-        { 
-          name: "Flora Fountain & Fort Heritage Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1572205336203-02f8373b9e40?w=500&auto=format&fit=crop", 
-          desc: "Admire the restored 1864 Roman goddess architectural fountain surrounded by Victorian colonial structures." 
-        },
-        { 
-          name: "Hanging Gardens (Pherozeshah Mehta Gardens)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Enjoy sunset views over the Arabian Sea from terraced hilltop gardens featuring manicured animal-shaped hedges." 
-        },
-        { 
-          name: "Dharavi Leather & Pottery Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Tour industrial artisan quarters to shop for handcrafted leather jackets, boots, bags, and traditional Kumbharwada pottery." 
-        }
+        { name: "Gateway of India", entry: 0, img: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&auto=format&fit=crop", desc: "Stand before the grand 26-meter basalt arch overlooking the Arabian Sea." },
+        { name: "Marine Drive Walk", entry: 0, img: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop", desc: "Stroll along the 3.6-kilometer seaside promenade known as the Queen's Necklace." },
+        { name: "Juhu Beach Street Food", entry: 0, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "Soak in coastal sunset views while savoring spicy Pav Bhaji and Bhel Puri." },
+        { name: "Elephanta Caves Ferry", entry: 260, img: "https://images.unsplash.com/photo-1626014903708-ec902094c3d2?w=500&auto=format&fit=crop", desc: "Ferry trip to 5th-century rock-cut cave temples dedicated to Lord Shiva." },
+        { name: "Chhatrapati Shivaji Terminus", entry: 0, img: "https://images.unsplash.com/photo-1572205336203-02f8373b9e40?w=500&auto=format&fit=crop", desc: "Victorian Gothic UNESCO World Heritage train station featuring ornate stone vaults." },
+        { name: "Bandra Fort & Sea Link", entry: 0, img: "https://images.unsplash.com/photo-1595658658421-a9ac457190ca?w=500&auto=format&fit=crop", desc: "Panoramic views of Bandra-Worli Sea Link from 17th-century Portuguese fort ruins." },
+        { name: "Sanjay Gandhi National Park", entry: 85, img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", desc: "Sprawling urban rainforest housing ancient rock-cut Kanheri Buddhist Caves." },
+        { name: "Chhatrapati Shivaji Museum", entry: 150, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "Indo-Saracenic building displaying over 50,000 rare historic artifacts." },
+        { name: "Haji Ali Dargah", entry: 0, img: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=500&auto=format&fit=crop", desc: "Walk across a narrow causeway to visit this famous 15th-century sea shrine." },
+        { name: "Colaba Causeway Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Bargain for vintage jewelry, handicrafts, and clothes on South Mumbai's shopping strip." },
+        { name: "Global Vipassana Pagoda", entry: 0, img: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=500&auto=format&fit=crop", desc: "World's largest pillarless stone dome built in Gorai for meditation and peace." },
+        { name: "Taraporewala Aquarium", entry: 60, img: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&auto=format&fit=crop", desc: "Historic marine aquarium featuring a 180-degree glass acrylic tunnel." },
+        // 10 Added Places:
+        { name: "Jehangir Art Gallery", entry: 0, img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500&auto=format&fit=crop", desc: "Premieres leading modern contemporary Indian art exhibitions in Kala Ghoda." },
+        { name: "Chor Bazaar Antique Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Hunt through legendary vintage flea markets for antique clocks, gramophones, and trinkets." },
+        { name: "Babulnath Temple", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Ascend 180 stone steps to an ancient 12th-century hill temple dedicated to Lord Shiva." },
+        { name: "Versova Beach & Rock Promenade", entry: 0, img: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&auto=format&fit=crop", desc: "Peaceful coastal stretch famous for community beach cleanups and sunset fishing boats." },
+        { name: "Nehru Centre & Planetarium", entry: 100, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Domed astronomy theater and interactive Indian culture and discovery pavilion." },
+        { name: "Worli Fort", entry: 0, img: "https://images.unsplash.com/photo-1595658658421-a9ac457190ca?w=500&auto=format&fit=crop", desc: "Walk through historic Worli Koliwada fishing village to reach a 1675 British coastal watchtower." },
+        { name: "Mahalaxmi Racecourse", entry: 0, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Watch morning horse training sessions along 225 acres of open South Mumbai green turf." },
+        { name: "Dr. Bhau Daji Lad Museum", entry: 20, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "Mumbai's oldest museum in Byculla showcasing Victorian interiors and city maps." },
+        { name: "Sassoon Docks Fish Market", entry: 0, img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop", desc: "Experience early morning bustle at Mumbai's historic 1875 commercial fishing harbor." },
+        { name: "Sewri Mangrove & Flamingo Point", entry: 0, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Observe thousands of migratory pink flamingos feeding along coastal mudflats in winter." }
       ],
       "Bengaluru": [
-        { 
-          name: "Lalbagh Botanical Garden", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop", 
-          desc: "Walk through 240 acres of rare flora surrounding a iconic 19th-century Glass House modeled after London's Crystal Palace." 
-        },
-        { 
-          name: "Bangalore Palace", 
-          entry: 240, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Explore Tudor-style architecture complete with fortified towers, vintage wood carvings, and royal family portraits." 
-        },
-        { 
-          name: "Church Street & MG Road", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop", 
-          desc: "Walk down cobblestone streets bustling with vintage bookstores, microbreweries, street music performance, and cozy cafes." 
-        },
-        { 
-          name: "Cubbon Park & Vidhana Soudha", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1588416936097-41850ab3d86d?w=500&auto=format&fit=crop", 
-          desc: "Enjoy a morning walk in 300 acres of lush greenery facing the majestic neo-Dravidian state legislature building." 
-        },
-        { 
-          name: "Tipu Sultan's Summer Palace", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1608459469599-e655074251ad?w=500&auto=format&fit=crop", 
-          desc: "Examine intricate teakwood pillars, arches, and historical exhibits inside the 1791 summer retreat of the Tiger of Mysore." 
-        },
-        { 
-          name: "Bannerghatta National Park", 
-          entry: 300, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Board a wildlife safari bus to spot tigers, lions, and bears before visiting India's first climate-controlled Butterfly Park." 
-        },
-        { 
-          name: "ISKCON Bangalore Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Ascend Hare Krishna Hill to visit this modern grand neo-classical spiritual complex featuring lush gardens and food court." 
-        },
-        { 
-          name: "Visvesvaraya Industrial Museum", 
-          entry: 85, 
-          img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&auto=format&fit=crop", 
-          desc: "Engage with interactive physics, aviation, and engineering exhibits designed across five floors of fun scientific displays." 
-        },
-        { 
-          name: "Ulsoor Lake Boat Ride", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Rent a pedal boat to glide around peaceful forested islands situated in one of Bengaluru's oldest historic lakes." 
-        },
-        { 
-          name: "HAL Aerospace Museum", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1519074069444-1ba4efe96836?w=500&auto=format&fit=crop", 
-          desc: "View actual retired Indian Air Force fighter aircraft, helicopters, commercial jets, and flight simulators outdoors." 
-        },
-        { 
-          name: "Commercial Street Shopping", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop", 
-          desc: "Navigate vibrant shopping lanes filled with traditional silk sarees, silver jewelry, spices, and custom tailor shops." 
-        },
-        { 
-          name: "Nandi Hills Sunset Point", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Drive up winding hill roads 4,800 feet above sea level for panoramic views above floating morning clouds." 
-        },
-        { 
-          name: "Chitrakala Parishath", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=500&auto=format&fit=crop", 
-          desc: "Visit a premier art complex showcasing traditional Mysore gold leaf paintings, international modern art galleries, and puppet archives." 
-        },
-        { 
-          name: "Bull Temple (Nandi Temple)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", 
-          desc: "Marvel at a colossal 16th-century monolithic Nandi bull statue carved out of a single granite rock in Basavanagudi." 
-        },
-        { 
-          name: "Jawaharlal Nehru Planetarium", 
-          entry: 75, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Watch celestial sky shows in the Sky-Theatre and explore outdoor science parks with interactive physics models." 
-        },
-        { 
-          name: "Sankey Tank", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Walk along paved lakeside trails surrounded by tall trees, migratory duck spots, and peaceful sunset benches in Sadashivanagar." 
-        },
-        { 
-          name: "St. Mary's Basilica", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", 
-          desc: "Visit Bengaluru's oldest church, built in 1882 in Gothic style with stained glass windows and arched spires." 
-        },
-        { 
-          name: "National Gallery of Modern Art (NGMA)", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Browse contemporary art exhibits in a restored heritage mansion featuring an outdoor sculpture garden and courtyard cafe." 
-        },
-        { 
-          name: "VV Puram Food Street", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Indulge in South Indian vegetarian street snacks like Paddus, Capsicum Bhajji, Bath Dosa, and Holige." 
-        },
-        { 
-          name: "Innovative Film City", 
-          entry: 600, 
-          img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop", 
-          desc: "Enjoy an entertainment park featuring aqua zones, 3D photo galleries, dinosaur parks, and movie set tours." 
-        },
-        { 
-          name: "Devanahalli Fort", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=500&auto=format&fit=crop", 
-          desc: "Explore a 1501 stone fort and birthplace of Tipu Sultan located near Bengaluru International Airport." 
-        },
-        { 
-          name: "Malleswaram Heritage & Street Art Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?w=500&auto=format&fit=crop", 
-          desc: "Stroll past historic flower markets, traditional South Indian houses, stepwells, and vibrant wall art murals." 
-        }
+        { name: "Lalbagh Botanical Garden", entry: 25, img: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop", desc: "240 acres of rare flora surrounding a 19th-century Glass House." },
+        { name: "Bangalore Palace", entry: 240, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "Tudor-style architecture complete with fortified towers and wood carvings." },
+        { name: "Church Street & MG Road", entry: 0, img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop", desc: "Cobblestone streets with vintage bookstores, microbreweries, and cafes." },
+        { name: "Cubbon Park & Vidhana Soudha", entry: 0, img: "https://images.unsplash.com/photo-1588416936097-41850ab3d86d?w=500&auto=format&fit=crop", desc: "300 acres of green parkland facing the neo-Dravidian state legislature." },
+        { name: "Tipu Sultan's Summer Palace", entry: 20, img: "https://images.unsplash.com/photo-1608459469599-e655074251ad?w=500&auto=format&fit=crop", desc: "Examine intricate teakwood pillars inside the 1791 royal summer retreat." },
+        { name: "Bannerghatta National Park", entry: 300, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Board a wildlife safari bus to spot tigers, lions, and bears." },
+        { name: "ISKCON Bangalore Temple", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Grand modern spiritual complex featuring lush gardens and food court." },
+        { name: "Visvesvaraya Industrial Museum", entry: 85, img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&auto=format&fit=crop", desc: "Interactive physics, aviation, and engineering exhibits for all ages." },
+        { name: "Ulsoor Lake Boat Ride", entry: 50, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Pedal boat around peaceful forested islands in one of the city's oldest lakes." },
+        { name: "HAL Aerospace Museum", entry: 50, img: "https://images.unsplash.com/photo-1519074069444-1ba4efe96836?w=500&auto=format&fit=crop", desc: "Retired IAF fighter jets, helicopters, commercial aircraft, and simulators." },
+        { name: "Commercial Street Shopping", entry: 0, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop", desc: "Lanes filled with silk sarees, silver jewelry, and vibrant textile shops." },
+        { name: "Nandi Hills Sunset Point", entry: 20, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "Drive up winding hill roads 4,800 feet above sea level for cloudscapes." },
+        // 10 Added Places:
+        { name: "Jawaharlal Nehru Planetarium", entry: 75, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Immersive space exploration shows and outdoor interactive science park." },
+        { name: "St. Mary's Basilica Shivajinagar", entry: 0, img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", desc: "Gothic style basilica built in 1882 featuring stained glass windows." },
+        { name: "National Gallery of Modern Art", entry: 20, img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500&auto=format&fit=crop", desc: "Colonial heritage mansion displaying Indian master art amidst quiet garden paths." },
+        { name: "Bull Temple (Dodda Basavana Gudi)", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "16th-century Dravidian temple featuring a massive granite Nandi bull monolith." },
+        { name: "Sankey Tank Park", entry: 0, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Man-made 1875 reservoir surrounded by jogging paths, ducks, and green canopy." },
+        { name: "Gandhi Bhavan Museum", entry: 0, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Tranquil memorial archive housing photographs and letters of Mahatma Gandhi." },
+        { name: "Malleswaram Heritage Walk", entry: 0, img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&auto=format&fit=crop", desc: "Walk old Bengaluru tree-lined streets, traditional flower markets, and dose eateries." },
+        { name: "Indiranagar 100ft Road", entry: 0, img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop", desc: "Explore fashion boutiques, artisanal coffee roasters, and rooftop dining hubs." },
+        { name: "Karnataka Chitrakala Parishath", entry: 20, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "Art complex housing Mysore traditional gold foil paintings and folk sculptures." },
+        { name: "Turahalli Forest Reserve", entry: 0, img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", desc: "Bengaluru's last surviving mini forest reserve ideal for rock climbing and trail hikes." }
       ],
       "Kolkata": [
-        { 
-          name: "Victoria Memorial", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop", 
-          desc: "Marvel at the majestic white Makrana marble monument surrounded by 64 acres of pristine lawns and water bodies." 
-        },
-        { 
-          name: "Howrah Bridge & Flower Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=500&auto=format&fit=crop", 
-          desc: "Cross the world's busiest cantilever bridge and explore the vibrant 140-year-old Mullick Ghat wholesale flower market underneath." 
-        },
-        { 
-          name: "Park Street Heritage Dining", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop", 
-          desc: "Sample iconic Kolkata Kathi rolls, legendary colonial bakeries, and live jazz venues along Kolkata's historic dining strip." 
-        },
-        { 
-          name: "Dakshineswar Kali Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1621849400072-f584d675714a?w=500&auto=format&fit=crop", 
-          desc: "Visit the 1855 Navaratna-style temple compound on the eastern bank of the Hooghly River dedicated to Goddess Bhavatarini." 
-        },
-        { 
-          name: "Indian Museum", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Step inside the oldest museum in Asia, founded in 1814, featuring ancient Gandhara art, fossils, and Egyptian mummies." 
-        },
-        { 
-          name: "Princep Ghat Boat Ride", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop", 
-          desc: "Enjoy a romantic traditional wooden boat ride on the river under the glowing lights of Vidyasagar Setu suspension bridge." 
-        },
-        { 
-          name: "Kumartuli Artisan Village", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop", 
-          desc: "Walk through narrow quarter lanes where generations of clay artisans sculpt intricate idols for Durga Puja celebrations." 
-        },
-        { 
-          name: "St. Paul's Cathedral", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", 
-          desc: "Admire Indo-Gothic architecture, Florentine frescoes, and magnificent stained glass windows in this historic 1847 cathedral." 
-        },
-        { 
-          name: "College Street Book Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500&auto=format&fit=crop", 
-          desc: "Browse through miles of wooden book stalls in the world's largest secondhand book market, known locally as 'Boi Para'." 
-        },
-        { 
-          name: "Belur Math", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=500&auto=format&fit=crop", 
-          desc: "Visit the serene headquarters of Ramakrishna Math, whose architecture intentionally unifies Christian, Islamic, and Hindu motifs." 
-        },
-        { 
-          name: "Eco Park New Town", 
-          entry: 30, 
-          img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", 
-          desc: "Explore a massive 480-acre urban park featuring life-sized replicas of the Seven Wonders of the World and lake kayaking." 
-        },
-        { 
-          name: "Science City Kolkata", 
-          entry: 60, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Experience Space Odyssey theaters, ropeway rides, motion simulators, and giant dinosaur parks at this massive science complex." 
-        },
-        { 
-          name: "Alipore Zoological Gardens", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", 
-          desc: "Explore India's oldest formally established zoo, opened in 1876, home to Royal Bengal tigers, giant tortoises, and reptile enclosures." 
-        },
-        { 
-          name: "Marble Palace Mansion", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Tour an ornate 1835 palatial residence built with 126 types of marble, housing western sculptures and Victorian art." 
-        },
-        { 
-          name: "Birla Planetarium", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Attend interactive astronomy presentations inside Asia's oldest and largest single-dome planetarium near Victoria Memorial." 
-        },
-        { 
-          name: "Sobhabazar Rajbari", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=500&auto=format&fit=crop", 
-          desc: "Step into an 18th-century aristocratic Bengali palace courtyard famous for heritage architecture and traditional festival events." 
-        },
-        { 
-          name: "Rabindra Sarobar Lake", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Enjoy quiet morning jogs around a 192-acre artificial lake surrounded by old trees, rowing clubs, and migratory birds." 
-        },
-        { 
-          name: "Jorasanko Thakurbari", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Visit Nobel laureate Rabindranath Tagore's ancestral home, now transformed into a museum showcasing his life and works." 
-        },
-        { 
-          name: "Metcalfe Hall", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", 
-          desc: "Admire British colonial Greek-revival architecture featuring 30 giant Corinthian pillars near the Hooghly River bank." 
-        },
-        { 
-          name: "St. John's Church", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Inspect 1787 neo-classical church grounds containing Job Charnock's mausoleum and Zoffany's famous 'Last Supper' painting." 
-        },
-        { 
-          name: "Botanical Garden (Acharya Jagadish Chandra Bose)", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop", 
-          desc: "Walk through 270 acres of living plant collections including the Great Banyan Tree spanning over 330 meters in circumference." 
-        },
-        { 
-          name: "New Market (Sir Stuart Hogg Market)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Bargain for clothes, leather goods, jewelry, and Bengal sweets in Kolkata's historic red-brick Victorian shopping arcade." 
-        }
+        { name: "Victoria Memorial", entry: 50, img: "https://images.unsplash.com/photo-1558431382-27e303142255?w=500&auto=format&fit=crop", desc: "White Makrana marble monument surrounded by 64 acres of pristine lawns." },
+        { name: "Howrah Bridge & Flower Market", entry: 0, img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=500&auto=format&fit=crop", desc: "Cantilever bridge over Hooghly river and 140-year-old flower market." },
+        { name: "Park Street Heritage Dining", entry: 0, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop", desc: "Sample Kolkata Kathi rolls, colonial bakeries, and live jazz venues." },
+        { name: "Dakshineswar Kali Temple", entry: 0, img: "https://images.unsplash.com/photo-1621849400072-f584d675714a?w=500&auto=format&fit=crop", desc: "Navaratna-style 1855 temple compound on the eastern bank of the Hooghly." },
+        { name: "Indian Museum", entry: 50, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "Oldest museum in Asia founded in 1814, featuring ancient fossils and mummies." },
+        { name: "Princep Ghat Boat Ride", entry: 100, img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop", desc: "Traditional wooden boat ride under Vidyasagar Setu suspension bridge." },
+        { name: "Kumartuli Artisan Village", entry: 0, img: "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=500&auto=format&fit=crop", desc: "Narrow lanes where generations of clay artisans sculpt Durga Puja idols." },
+        { name: "St. Paul's Cathedral", entry: 0, img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", desc: "Indo-Gothic architecture and magnificent stained glass windows in 1847 cathedral." },
+        { name: "College Street Book Market", entry: 0, img: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500&auto=format&fit=crop", desc: "World's largest secondhand book market, known locally as Boi Para." },
+        { name: "Belur Math", entry: 0, img: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=500&auto=format&fit=crop", desc: "Headquarters of Ramakrishna Math, unifying Christian, Islamic, and Hindu motifs." },
+        { name: "Eco Park New Town", entry: 30, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", desc: "480-acre park featuring life-sized replicas of Seven Wonders of the World." },
+        { name: "Science City Kolkata", entry: 60, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Space Odyssey theaters, ropeway rides, and motion simulators." },
+        // 10 Added Places:
+        { name: "Marble Palace Mansion", entry: 0, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "1835 palatial mansion filled with marble walls, European statues, and paintings." },
+        { name: "Jorasanko Thakurbari", entry: 20, img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=500&auto=format&fit=crop", desc: "Ancestral home of Nobel laureate Rabindranath Tagore, now a cultural museum." },
+        { name: "Acharya Jagadish Chandra Bose Botanical Garden", entry: 50, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Home to the famous 250-year-old Great Banyan Tree in Shibpur." },
+        { name: "Alipore Zoological Gardens", entry: 30, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "India's oldest formally established zoo housing reptiles, tigers, and birds." },
+        { name: "Kalighat Temple", entry: 0, img: "https://images.unsplash.com/photo-1621849400072-f584d675714a?w=500&auto=format&fit=crop", desc: "One of the 51 sacred Shakti Peethas located along Adi Ganga canal." },
+        { name: "Mother House (Missionaries of Charity)", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Visit the tomb and humble living quarters of Saint Mother Teresa." },
+        { name: "Birla Planetarium", entry: 100, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Buddhist Sanchi Stupa-inspired planetarium projector theater." },
+        { name: "New Market (Sir Stuart Hogg Market)", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Historic 1874 red brick arcade housing over 2,000 retail shopping stalls." },
+        { name: "Nabadwip Tram Ride & Maidan Walk", entry: 20, img: "https://images.unsplash.com/photo-1572205336203-02f8373b9e40?w=500&auto=format&fit=crop", desc: "Ride Asia's oldest operating vintage electric streetcar across Kolkata's central park." },
+        { name: "Sobhabazar Rajbari", entry: 0, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "Royal palace complex famous for historic courtyard architecture and heritage festivals." }
       ],
       "Chennai": [
-        { 
-          name: "Kapaleeshwarar Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", 
-          desc: "Admire the towering 37-meter rainbow Gopuram covered in mythological stone figures at this 7th-century Mylapore temple." 
-        },
-        { 
-          name: "Marina Beach Promenade", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Stroll along the world's second-longest urban beach while enjoying local fried fish, sunderal snacks, and ocean breeze." 
-        },
-        { 
-          name: "San Thome Cathedral Basilica", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", 
-          desc: "Visit this sparkling white Neo-Gothic cathedral constructed over the 1st-century tomb of Saint Thomas the Apostle." 
-        },
-        { 
-          name: "Fort St. George & Museum", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", 
-          desc: "Tour the first British fortress built in India in 1644, containing historic military relics, coins, and colonial paintings." 
-        },
-        { 
-          name: "Government Museum Chennai", 
-          entry: 15, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Inspect world-famous 10th-century Chola bronze sculptures, including the iconic Nataraja, inside a 16-acre campus complex." 
-        },
-        { 
-          name: "Elliot's Beach (Besant Nagar)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&auto=format&fit=crop", 
-          desc: "Relax at a cleaner, peaceful coastal shoreline featuring the historic Schmidt Memorial and surrounding hipster cafes." 
-        },
-        { 
-          name: "DakshinaChitra Living Museum", 
-          entry: 175, 
-          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", 
-          desc: "Walk through 18 authentic reconstructed heritage houses representing traditional lifestyle, craft, and architecture of South India." 
-        },
-        { 
-          name: "Guindy National Park", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Discover a rare protected evergreen forest within city limits housing spotted deer, blackbucks, and tropical bird species." 
-        },
-        { 
-          name: "Theosophical Society Gardens", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Escape city noise inside 260 acres of peaceful forest sanctuaries containing the famous 450-year-old Great Banyan Tree." 
-        },
-        { 
-          name: "Valluvar Kottam", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Stand in awe of a 39-meter granite temple chariot monument built in honor of revered Tamil poet-philosopher Thiruvalluvar." 
-        },
-        { 
-          name: "MGR Film City", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop", 
-          desc: "Explore outdoor film sets, artificial landscapes, and cinema studios used across Kollywood South Indian movie productions." 
-        },
-        { 
-          name: "Covelong Beach Surfing Point", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=500&auto=format&fit=crop", 
-          desc: "Visit a picturesque fishing village famous for sandy beaches, surf schools, stand-up paddleboarding, and coastal seafood." 
-        },
-        { 
-          name: "Arignar Anna Zoological Park (Vandalur)", 
-          entry: 200, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Tour Southeast Asia's largest botanical and zoological reserve via battery-operated vehicles to view free-roaming wildlife." 
-        },
-        { 
-          name: "Madras Crocodile Bank Trust", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", 
-          desc: "Visit a world-class reptile conservation center housing over 2,000 adult crocodiles, gharials, alligators, and sea turtles." 
-        },
-        { 
-          name: "Kalakshetra Foundation", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", 
-          desc: "Walk through a quiet green academy dedicated to preserving traditional Bharatanatyam dance, Carnatic music, and craft weaves." 
-        },
-        { 
-          name: "Semmozhi Poonga Botanical Garden", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Relax in a 20-acre urban park filled with exotic plants, medicinal herbs, duck ponds, and glasshouse display gardens." 
-        },
-        { 
-          name: "Birla Planetarium Chennai", 
-          entry: 60, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Explore space science galleries, 3D planetarium shows, and outdoor science parks near the Periyar Science and Technology Centre." 
-        },
-        { 
-          name: "Thiruvanmiyur Beach", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Enjoy quiet sunrise walks, fresh sea breeze, and beachfront food stalls away from the main city crowds." 
-        },
-        { 
-          name: "Parthasarathy Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", 
-          desc: "Visit Triplicane's iconic 8th-century Vaishnavite temple featuring detailed stone pillars and colourful gopurams." 
-        },
-        { 
-          name: "Connemara Public Library", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500&auto=format&fit=crop", 
-          desc: "Step inside one of Asia's largest national depository libraries, featuring century-old wooden reading halls and rare archives." 
-        },
-        { 
-          name: "Mylapore Heritage Street Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=500&auto=format&fit=crop", 
-          desc: "Stroll around temple tank streets lined with brassware shops, traditional silk stores, filter coffee spots, and flower stalls." 
-        },
-        { 
-          name: "Armenian Church", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", 
-          desc: "Visit a peaceful 1712 heritage church complex in George Town famous for its standalone belfry tower containing six massive bells." 
-        }
+        { name: "Kapaleeshwarar Temple", entry: 0, img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", desc: "Towering 37-meter rainbow Gopuram at this 7th-century Mylapore temple." },
+        { name: "Marina Beach Promenade", entry: 0, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "World's second-longest urban beach promenade with street food stalls." },
+        { name: "San Thome Cathedral Basilica", entry: 0, img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", desc: "Sparkling white Neo-Gothic cathedral over the 1st-century tomb of St. Thomas." },
+        { name: "Fort St. George & Museum", entry: 20, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "First British fortress built in India in 1644 with military relics." },
+        { name: "Government Museum Chennai", entry: 15, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "Inspect world-famous 10th-century Chola bronze sculptures including Nataraja." },
+        { name: "Elliot's Beach (Besant Nagar)", entry: 0, img: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&auto=format&fit=crop", desc: "Peaceful coastal shoreline featuring the Schmidt Memorial and seaside cafes." },
+        { name: "DakshinaChitra Living Museum", entry: 175, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "18 authentic heritage houses representing traditional lifestyle of South India." },
+        { name: "Guindy National Park", entry: 20, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Protected evergreen forest within city limits housing spotted deer and blackbucks." },
+        { name: "Theosophical Society Gardens", entry: 0, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "260 acres of peaceful forest sanctuaries containing a 450-year-old Great Banyan Tree." },
+        { name: "Valluvar Kottam", entry: 20, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "39-meter granite temple chariot monument honoring Tamil poet Thiruvalluvar." },
+        { name: "MGR Film City", entry: 50, img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop", desc: "Outdoor film sets and studio backlots used across South Indian cinema." },
+        { name: "Covelong Beach Surfing Point", entry: 0, img: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=500&auto=format&fit=crop", desc: "Fishing village famous for sandy beaches, surf schools, and coastal seafood." },
+        // 10 Added Places:
+        { name: "Mahabalipuram Shore Temple & Reliefs", entry: 40, img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", desc: "7th-century UNESCO rock cut shore temples and Arjuna's Penance bass-relief." },
+        { name: "Arignar Anna Zoological Park (Vandalur)", entry: 50, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Sprawling 1,500-acre flora and fauna safari park south of Chennai." },
+        { name: "Parthasarathy Temple Triplicane", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "8th-century Vaishnavite temple featuring complex granite carved pillars." },
+        { name: "Pulicat Lake Bird Sanctuary", entry: 0, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "India's second largest brackish water lagoon teeming with flamingos and pelicans." },
+        { name: "Semmozhi Poonga Botanical Park", entry: 15, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "20-acre lush city garden featuring medicinal plants, bonsai, and fern gardens." },
+        { name: "Birla Planetarium Chennai", entry: 30, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Periyar Science Center featuring digital sky shows and astronomy galleries." },
+        { name: "T. Nagar Ranganathan Street", entry: 0, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop", desc: "Bustling retail commercial hub famous for Kanchipuram silk sarees and jewelry." },
+        { name: "Connemara Public Library", entry: 0, img: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500&auto=format&fit=crop", desc: "1896 National Depository library featuring century-old wooden reading halls." },
+        { name: "Cholamandal Artists' Village", entry: 20, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "India's largest self-supporting artists' commune displaying modern sculptures." },
+        { name: "Muttukadu Boat House", entry: 120, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Watersports facility offering speedboats, jet skis, and pedal boats on backwaters." }
       ],
       "Hyderabad": [
-        { 
-          name: "Charminar & Laad Bazaar", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=500&auto=format&fit=crop", 
-          desc: "Climb the 1591 landmark mosque archway and shop for traditional hand-crafted lac bangles and Hyderabad pearls below." 
-        },
-        { 
-          name: "Chowmahalla Palace", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Step inside the grand seat of the Asaf Jahi dynasty featuring ornate chandeliers, fountains, and vintage royal Rolls-Royce cars." 
-        },
-        { 
-          name: "Golconda Fort", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Experience acoustic clapping tricks and explore massive citadel gates that once guarded the world's most famous diamond mines." 
-        },
-        { 
-          name: "Hussain Sagar Lake", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Take a ferry ride across the heart-shaped lake to visit the colossal 18-meter monolithic Buddha statue standing at Gibraltar Rock." 
-        },
-        { 
-          name: "Qutb Shahi Tombs", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", 
-          desc: "Walk among 21 domed grand mausoleums surrounded by landscaped gardens showcasing Persian and Hindu architectural blend." 
-        },
-        { 
-          name: "Salar Jung Museum", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "View the famous 'Veiled Rebecca' marble statue and the historic musical bracket clock in one of the world's largest solo art collections." 
-        },
-        { 
-          name: "Ramoji Film City", 
-          entry: 1350, 
-          img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop", 
-          desc: "Tour the world's largest film studio complex spanning 2,000 acres, complete with movie sets, stunts, and theme parks." 
-        },
-        { 
-          name: "Birla Mandir", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Enjoy quiet hilltop city views from a striking pure white marble temple constructed using 2,000 tons of Rajasthani stone." 
-        },
-        { 
-          name: "Nehru Zoological Park", 
-          entry: 70, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Drive through safari enclosures to observe Asiatic lions, Royal Bengal tigers, and Indian rhinos in expansive habitats." 
-        },
-        { 
-          name: "Lumbini Park", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", 
-          desc: "Enjoy relaxed evening lakefront walks and 3D laser light water shows along the banks of Hussain Sagar." 
-        },
-        { 
-          name: "NTR Gardens", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Ride a mini monorail, explore giant insect sculptures, and relax in vibrant flower gardens near the waterfront." 
-        },
-        { 
-          name: "Shilparamam Arts Village", 
-          entry: 60, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Explore a traditional crafts village in HITEC City showcasing rural Indian art, pottery, wood carvings, and folk dances." 
-        },
-        { 
-          name: "Sudha Cars Museum", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&auto=format&fit=crop", 
-          desc: "Discover a quirky world record-holding museum featuring handmade drivable cars shaped like high heels, cameras, burgers, and sports gear." 
-        },
-        { 
-          name: "Taramati Baradari", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Walk through a 12-arched historic music pavilion built atop a hill with brilliant acoustic structure overlooking Ibrahim Bagh." 
-        },
-        { 
-          name: "State Archaeology Museum", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Examine ancient Egyptian mummies, Buddhist sculptures, Kakatiya Dynasty bronzes, and coins in Public Gardens." 
-        },
-        { 
-          name: "Faluknama Palace View & Tour", 
-          entry: 500, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Admire the scorpion-shaped Italian marble palace of the Nizams, featuring Venetian chandeliers and lush terraced gardens." 
-        },
-        { 
-          name: "KBR National Park (Kasu Brahmananda Reddy)", 
-          entry: 40, 
-          img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", 
-          desc: "Hike through a 390-acre protected urban jungle in Jubliee Hills housing peacocks, pangolins, and rare flora species." 
-        },
-        { 
-          name: "Durgam Cheruvu Secret Lake & Cable Bridge", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1595658658421-a9ac457190ca?w=500&auto=format&fit=crop", 
-          desc: "Walk along floating boardwalks and take in glowing night views of the cable-stayed bridge spanning over the lake." 
-        },
-        { 
-          name: "Jagannath Temple Banjara Hills", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Visit a modern replica of the Puri Jagannath temple built with intricate red sandstone carvings in central Hyderabad." 
-        },
-        { 
-          name: "Spanish Mosque (Jamal Masjid)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&auto=format&fit=crop", 
-          desc: "Admire rare Moorish-Spanish Gothic Islamic architecture featuring pointed spires and delicate arches in Begumpet." 
-        },
-        { 
-          name: "Chilkur Balaji Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", 
-          desc: "Visit an ancient temple on the banks of Osman Sagar lake, famously known as the 'Visa Temple' of Hyderabad." 
-        },
-        { 
-          name: "Begum Bazaar Street Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Navigate the largest commercial market in Hyderabad for wholesale spices, dry fruits, brassware, and household goods." 
-        }
+        { name: "Charminar & Laad Bazaar", entry: 25, img: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=500&auto=format&fit=crop", desc: "1591 landmark mosque archway and hand-crafted lac bangle shops." },
+        { name: "Chowmahalla Palace", entry: 100, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "Seat of Asaf Jahi dynasty featuring ornate chandeliers and vintage Rolls-Royces." },
+        { name: "Golconda Fort", entry: 25, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Acoustic clapping tricks and historic citadel gates of diamond mines." },
+        { name: "Hussain Sagar Lake", entry: 0, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Ferry ride across the lake to visit the colossal 18-meter monolithic Buddha statue." },
+        { name: "Qutb Shahi Tombs", entry: 20, img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", desc: "21 domed grand mausoleums surrounded by landscaped Persian-style gardens." },
+        { name: "Salar Jung Museum", entry: 50, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "View the Veiled Rebecca marble statue in one of the world's largest solo art collections." },
+        { name: "Ramoji Film City", entry: 1350, img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop", desc: "World's largest film studio complex spanning 2,000 acres of movie sets." },
+        { name: "Birla Mandir", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Hilltop pure white marble temple constructed using 2,000 tons of Rajasthani stone." },
+        { name: "Nehru Zoological Park", entry: 70, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Drive-through safari enclosures to observe Asiatic lions and Royal Bengal tigers." },
+        { name: "Lumbini Park", entry: 20, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", desc: "Relaxed evening lakefront walks and 3D laser light water shows." },
+        { name: "NTR Gardens", entry: 20, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Ride a mini monorail and explore giant insect sculptures near the waterfront." },
+        { name: "Shilparamam Arts Village", entry: 60, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Traditional crafts village in HITEC City showcasing rural Indian art and folk dance." },
+        // 10 Added Places:
+        { name: "Faluknama Palace Heritage View", entry: 0, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "Marvel at the Nizam's hilltop scorpion-shaped Italian marble palace palace exterior." },
+        { name: "Sudha Cars Museum", entry: 50, img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&auto=format&fit=crop", desc: "Quirky handmade museum of drivable cars shaped like shoes, cameras, and toilets." },
+        { name: "Taramati Baradari", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Historic acoustic music pavilion built atop a hill near Golconda for royal singers." },
+        { name: "KBR National Park (Jubilee Hills)", entry: 20, img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", desc: "Protected urban forest trail offering peaceful nature walks among peacocks." },
+        { name: "Purani Haveli & Nizam Museum", entry: 80, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "Examine the world's longest wooden wardrobe and gold gifts of the 7th Nizam." },
+        { name: "Jagannath Temple Banjara Hills", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Modern red sandstone replica of the iconic Puri Jagannath shrine." },
+        { name: "Durgam Cheruvu Secret Lake & Bridge", entry: 0, img: "https://images.unsplash.com/photo-1595658658421-a9ac457190ca?w=500&auto=format&fit=crop", desc: "Illuminated cable-stayed bridge over a secluded lake surrounded by granite boulders." },
+        { name: "Mecca Masjid", entry: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&auto=format&fit=crop", desc: "One of India's largest heritage mosques built using soil brought directly from Mecca." },
+        { name: "Osman Sagar (Gandipet Lake)", entry: 0, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Serene reservoir lake park offering sunset views on the city outskirts." },
+        { name: "State Archaeology Museum", entry: 10, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Located in Public Gardens, housing ancient Kakatiya bronzes and an Egyptian mummy." }
       ],
       "Ahmedabad": [
-        { 
-          name: "Sabarmati Ashram", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=500&auto=format&fit=crop", 
-          desc: "Visit Mahatma Gandhi's peaceful riverside headquarters from where he launched the historic 1930 Dandi Salt March." 
-        },
-        { 
-          name: "Adalaj Stepwell (Vav)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Descend five subterranean stories into a 1498 Solanki-style sandstone stepwell covered in intricate mythological carvings." 
-        },
-        { 
-          name: "Sabarmati Riverfront", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Stroll along an urban waterfront park featuring cycling tracks, flower parks, water sports, and sunset view plazas." 
-        },
-        { 
-          name: "Heritage Pols Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=500&auto=format&fit=crop", 
-          desc: "Explore UNESCO-listed densely packed residential clusters featuring carved wooden facades and historic secret passages." 
-        },
-        { 
-          name: "Sidi Saiyyed Mosque", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&auto=format&fit=crop", 
-          desc: "Admire the world-famous stone latticework 'Tree of Life' window carved out of yellow sandstone in 1573." 
-        },
-        { 
-          name: "Manek Chowk Food Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Experience an old city square that transforms at night into a bustling street food haven famous for cheese pineapple sandwiches and Dosa." 
-        },
-        { 
-          name: "Kankaria Lake Park", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Visit a 15th-century circular lake featuring an island garden palace, tethered hot air balloon rides, and a zoo." 
-        },
-        { 
-          name: "Auto World Vintage Car Museum", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&auto=format&fit=crop", 
-          desc: "Inspect over 100 pristine vintage vehicles including hand-built Rolls-Royces, Bentleys, Cadillacs, and horse-drawn carriages." 
-        },
-        { 
-          name: "Akshardham Temple (Gandhinagar)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1627894006066-b45785055b8e?w=500&auto=format&fit=crop", 
-          desc: "Tour a 23-acre pink sandstone complex filled with detailed stone carvings, audio-visual exhibits, and expansive gardens." 
-        },
-        { 
-          name: "Calico Museum of Textiles", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=500&auto=format&fit=crop", 
-          desc: "View one of the world's finest collections of historic Indian fabrics, court textiles, double ikats, and antique weaves." 
-        },
-        { 
-          name: "Gujarat Science City", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Explore futuristic robotics galleries, India's largest aquatic gallery with an shark tunnel, and 3D IMAX theaters." 
-        },
-        { 
-          name: "Hutheesing Jain Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Walk through an elegant double-storied white marble temple built in 1848 featuring 52 individual shrines." 
-        },
-        { 
-          name: "Sardar Vallabhbhai Patel National Memorial", 
-          entry: 30, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Step inside Moti Shahi Mahal to explore interactive multi-media exhibits detailing India's independence movement and unification." 
-        },
-        { 
-          name: "Dada Harir Stepwell", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Explore a 1500 subterranean sandstone stepwell built in Asarwa featuring intricate floral motifs and Arabic inscriptions." 
-        },
-        { 
-          name: "Jhalta Minar (Shaking Minarets)", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500&auto=format&fit=crop", 
-          desc: "Observe the architectural enigma of Siddi Bashir mosque where shaking one minaret causes the other to vibrate gently." 
-        },
-        { 
-          name: "Law Garden Night Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Bargain for traditional Gujarati ethnic wear, mirror-work Chaniya Cholis, wall hangings, and handicraft souvenirs." 
-        },
-        { 
-          name: "Vikram Sarabhai Space Exhibition", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", 
-          desc: "Learn about India's satellite launches, space technology, rocket models, and lunar missions at ISRO's visitor center." 
-        },
-        { 
-          name: "Sarkhej Roza", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", 
-          desc: "Visit an elegant 15th-century Sufi shrine, palace, and tomb complex built around a central water tank." 
-        },
-        { 
-          name: "Sanskar Kendra Museum", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Examine a modern city museum building designed by architect Le Corbusier housing textile and kite history exhibits." 
-        },
-        { 
-          name: "Kamla Nehru Zoological Garden", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Stroll around Kankaria lake woodland habitats housing rare albino animals, nocturnal birds, and reptile parks." 
-        },
-        { 
-          name: "Bhadra Fort & Square", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=500&auto=format&fit=crop", 
-          desc: "Walk through Sultan Ahmad Shah's 1411 royal fort, stone arches, courtyard palaces, and nearby street bazaars." 
-        },
-        { 
-          name: "Narmada Canal Front Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Enjoy quiet suburban evening walks along green canal banks equipped with solar park pathways." 
-        }
+        { name: "Sabarmati Ashram", entry: 0, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Mahatma Gandhi's peaceful headquarters along the Sabarmati riverbanks." },
+        { name: "Adalaj Stepwell (Vav)", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "5-story 1498 Solanki-style carved sandstone subterranean stepwell." },
+        { name: "Sabarmati Riverfront Promenade", entry: 0, img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop", desc: "Walk along urban riverfront parks, cycling tracks, and Atal Pedestrian Bridge." },
+        { name: "Kankaria Lake & Zoo", entry: 25, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "15th-century circular lake with tethered balloon rides, mini trains, and zoo." },
+        { name: "Siddi Saiyyed Mosque", entry: 0, img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&auto=format&fit=crop", desc: "World-famous intricately carved yellow stone 'Tree of Life' lattice windows." },
+        { name: "Calico Museum of Textiles", entry: 0, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "Premier textile museum displaying court fabrics, court costumes, and ikats." },
+        { name: "Akshardham Temple Gandhinagar", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "23-acre sandstone temple complex featuring light water shows and gardens." },
+        { name: "Auto World Vintage Car Museum", entry: 100, img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&auto=format&fit=crop", desc: "Collection of over 100 vintage Rolls-Royces, Bentleys, Maybachs, and Cadillacs." },
+        { name: "Hutheesing Jain Temple", entry: 0, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "1848 white marble temple with 52 shrines dedicated to Lord Dharmanatha." },
+        { name: "Manek Chowk Night Food Market", entry: 0, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop", desc: "Jewelry market by day transforming into a bustling midnight street food bazaar." },
+        { name: "Science City Ahmedabad", entry: 50, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Robotics gallery, aquatic kingdom aquarium, and IMAX 3D space theaters." },
+        { name: "Law Garden Night Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Street markets brimming with Gujarati traditional Chaniya Cholis and mirror work." },
+        // 10 Added Places:
+        { name: "Bhadra Fort & Teen Darwaza", entry: 10, img: "https://images.unsplash.com/photo-1597040639427-419165365a49?w=500&auto=format&fit=crop", desc: "Royal 1411 fort complex and triple arched stone entry gate to the walled city." },
+        { name: "Dada Harir Stepwell", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Intricately carved 1499 stepwell built in Asarwa with Arabic inscriptions." },
+        { name: "Sarkhej Roza Heritage Complex", entry: 0, img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", desc: "Elegant Sufi tomb complex surrounding a central water tank, called the Acropolis of Ahmedabad." },
+        { name: "Shaking Minarets (Jhulta Minar)", entry: 0, img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500&auto=format&fit=crop", desc: "Mysterious 15th-century minarets where vibrating one sways the other." },
+        { name: "Lalbhai Dalpatbhai Museum", entry: 0, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "Collection of ancient Indian sculptures, wood carvings, and miniature manuscript paintings." },
+        { name: "Vichaar Utensil Museum", entry: 50, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "Unique museum housing thousands of historic brass, copper, and bronze kitchenware." },
+        { name: "Thol Bird Sanctuary Lake", entry: 50, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Freshwater lake sanctuary housing sarus cranes, pelicans, and waterbirds." },
+        { name: "Gujarat High Court Gallery Walk", entry: 0, img: "https://images.unsplash.com/photo-1588416936097-41850ab3d86d?w=500&auto=format&fit=crop", desc: "Modern architectural precinct designed by legendary architect Le Corbusier." },
+        { name: "Nirma Vidya Vihar Park", entry: 0, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Quiet manicured university campus gardens and architectural pavilions." },
+        { name: "Sanskar Kendra Museum", entry: 10, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Le Corbusier-designed city museum detailing Ahmedabad's history, art, and kites." }
       ],
       "Pune": [
-        { 
-          name: "Shaniwar Wada Palace", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=500&auto=format&fit=crop", 
-          desc: "Walk through the massive Dilli Darwaza gates of the 1732 seat of the Peshwa rulers of the Maratha Empire." 
-        },
-        { 
-          name: "Aga Khan Palace", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Visit the Italian-arched palace where Mahatma Gandhi was imprisoned in 1942, featuring tranquil lawns and historic memorials." 
-        },
-        { 
-          name: "FC Road & Cafe Hop", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop", 
-          desc: "Experience Pune's youth culture along Fergusson College Road while enjoying classic Bun Maska and Irani Chai." 
-        },
-        { 
-          name: "Sinhagad Fort Trek", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&auto=format&fit=crop", 
-          desc: "Hike up the cliffside fortress for sweeping views of the Sahyadri mountains and sample hot rural Pitla Bhakri." 
-        },
-        { 
-          name: "Raja Dinkar Kelkar Museum", 
-          entry: 100, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Explore a fascinating private collection of 20,000 everyday Indian artifacts, musical instruments, lamps, and palace doors." 
-        },
-        { 
-          name: "Vetal Tekdi Hilltop", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Climb the highest elevation point within Pune city limits for sunrise hikes, bird watching, and fresh forest air." 
-        },
-        { 
-          name: "Dagdusheth Ganpati Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", 
-          desc: "Visit one of Maharashtra's most famous and richly adorned Ganesha temples located in the bustling heart of old Pune." 
-        },
-        { 
-          name: "Osho Teerth Park", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Stroll through a beautifully reclaimed Japanese-style Zen garden featuring bamboo groves and running streams in Koregaon Park." 
-        },
-        { 
-          name: "Pataleshwar Cave Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", 
-          desc: "Descend into an 8th-century monolithic rock-cut cave temple dedicated to Lord Shiva, carved out of single basalt rock." 
-        },
-        { 
-          name: "Khadakwasla Dam Waterfront", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Gather at a peaceful reservoir lakefront popular for evening sunset breezes and roasted corn street food stalls." 
-        },
-        { 
-          name: "National War Museum", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", 
-          desc: "Inspect a MIG-23BN fighter jet, navy models, and military memorabilia managed by citizens honoring post-independence soldiers." 
-        },
-        { 
-          name: "Parvati Hill Temple", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop", 
-          desc: "Ascend 103 stone steps to reach a hilltop temple complex and museum overlooking Pune city skyline." 
-        },
-        { 
-          name: "Mahatma Phule Museum", 
-          entry: 20, 
-          img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", 
-          desc: "Browse through an educational museum founded in 1890 housing historic industrial products, agricultural tools, and handicraft models." 
-        },
-        { 
-          name: "Empress Botanical Garden", 
-          entry: 25, 
-          img: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&auto=format&fit=crop", 
-          desc: "Relax under 39 acres of centuries-old rare tropical trees, flower nurseries, winding streams, and historic colonial garden paths." 
-        },
-        { 
-          name: "Rajiv Gandhi Zoological Park (Katraj Zoo)", 
-          entry: 40, 
-          img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", 
-          desc: "Explore a modern zoo and snake park surrounding Katraj Lake housing white tigers, leopards, and king cobras." 
-        },
-        { 
-          name: "Shinde Chhatri", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", 
-          desc: "Admire elaborate Rajasthani architectural stone carvings, painted ceilings, and stained glass windows in Wanowrie." 
-        },
-        { 
-          name: "Pu La Deshpande Garden (Okayama Park)", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", 
-          desc: "Stroll through a Japanese-style garden designed with natural streams, wooden bridges, lawn terraces, and koi ponds." 
-        },
-        { 
-          name: "Lal Mahal", 
-          entry: 10, 
-          img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=500&auto=format&fit=crop", 
-          desc: "Visit the reconstructed historic red brick palace where Chhatrapati Shivaji Maharaj spent his early childhood years." 
-        },
-        { 
-          name: "Katraj Lake Boat Club", 
-          entry: 50, 
-          img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", 
-          desc: "Rent pedal boats for a scenic cruise across Katraj Lake with views of the surrounding hills and island gardens." 
-        },
-        { 
-          name: "Pashan Lake Bird Sanctuary", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", 
-          desc: "Enjoy early morning nature walks along bamboo trails to observe resident heron, egret, and migratory duck species." 
-        },
-        { 
-          name: "Tulshibaug Market", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", 
-          desc: "Experience old Pune's most iconic shopping lane packed with traditional cookware, brass items, jewelry, and street snacks." 
-        },
-        { 
-          name: "Koregaon Park Street Walk", 
-          entry: 0, 
-          img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=500&auto=format&fit=crop", 
-          desc: "Walk through tree-canopied lanes filled with boutique cafes, European bakeries, lifestyle shops, and organic markets." 
-        }
+        { name: "Shaniwar Wada Fort", entry: 25, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Historic seat of the Maratha Peshwas built in 1732 featuring massive teak gates." },
+        { name: "Aga Khan Palace", entry: 25, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "Italian arches and spacious lawns; served as Gandhi's sanctuary during Salt March era." },
+        { name: "Sinhagad Fort Trek", entry: 50, img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", desc: "Hilltop Maratha fortress offering breathtaking views and hot pitla bhakri." },
+        { name: "Dagdusheth Halwai Ganpati Temple", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Famous golden shrine dedicated to Lord Ganesha in the heart of the city." },
+        { name: "Osho Teerth Park & Ashram", entry: 0, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Zen-inspired Japanese garden with bamboo groves and running streams in Koregaon Park." },
+        { name: "Raja Dinkar Kelkar Museum", entry: 100, img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=500&auto=format&fit=crop", desc: "20,000 everyday Indian artifacts, musical instruments, and Mastani Mahal exhibits." },
+        { name: "Pataleshwar Cave Temple", entry: 0, img: "https://images.unsplash.com/photo-1548013146-72479768bada?w=500&auto=format&fit=crop", desc: "8th-century monolithic rock-cut cave temple sculpted directly out of basalt." },
+        { name: "Parvati Hill Temple Sunset", entry: 0, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "Climb 103 stone steps for panoramic 360-degree sunset views over Pune." },
+        { name: "Pune University Campus (SPPU)", entry: 0, img: "https://images.unsplash.com/photo-1588416936097-41850ab3d86d?w=500&auto=format&fit=crop", desc: "411 acres of colonial heritage stone buildings, banyan tree trails, and lawns." },
+        { name: "Fergusson College Road Cafes", entry: 0, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop", desc: "Student hangout hub packed with iconic bakeries, cafes, and bookstalls." },
+        { name: "Khadakwasla Dam Backwaters", entry: 0, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Scenic lakeside picnic destination serving roasted corn and hot bhajiyas." },
+        { name: "Pu La Deshpande Japanese Garden", entry: 20, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", desc: "Modeled after Okayama Korakuen Garden, featuring wooden bridges and fish ponds." },
+        // 10 Added Places:
+        { name: "Lohagad Fort & Bhaja Caves", entry: 50, img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", desc: "Iron fortress perched 3,400 feet up near ancient 2nd-century BC Buddhist rock caves." },
+        { name: "National War Museum Pune", entry: 0, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Patriotic memorial displaying MiG-23 fighter jets, tanks, and naval armaments." },
+        { name: "Vetal Tekdi Hilltop Walk", entry: 0, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "Highest elevation point in Pune city limits, perfect for sunrise hikes." },
+        { name: "Mulshi Dam Lake", entry: 0, img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop", desc: "Picturesque Western Ghats dam surrounded by misty green hills and waterfalls." },
+        { name: "Tribal Cultural Museum", entry: 10, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "Showcases masks, jewelry, and instruments from Maharashtra's indigenous tribes." },
+        { name: "Chaturshringi Temple", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Hillside temple dedicated to Goddess Chaturshringi nestled on Senapati Bapat road." },
+        { name: "Lal Mahal", entry: 10, img: "https://images.unsplash.com/photo-1597040639427-419165365a49?w=500&auto=format&fit=crop", desc: "Reconstructed red palace where Chhatrapati Shivaji Maharaj spent his childhood." },
+        { name: "Empress Botanical Garden", entry: 20, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "39-acre historic British-era garden featuring rare tropical plant species." },
+        { name: "Mahatma Phule Wada Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Victorian Gothic circular fruit and flower market built in 1885." },
+        { name: "Katraj Snake Park & Zoo", entry: 40, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Reptile park and wildlife conservation center situated around Katraj Lake." }
       ]
     };
 
@@ -1315,7 +555,7 @@
       if (userDisplayName) userDisplayName.textContent = activeUser;
       if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
 
-      // Dynamic Non-Repeating Multi-Day Generator
+      // Dynamic Non-Repeating Multi-Day Generator with expanded pool
       function renderItinerary() {
         const itinerarySection = document.getElementById('itinerarySection');
         const itineraryCardsGrid = document.getElementById('itineraryCardsGrid');

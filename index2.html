@@ -212,105 +212,35 @@
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-            <i data-lucide="sparkles" class="w-5 h-5 text-brand-600"></i> Trending Destinations
+            <i data-lucide="sparkles" class="w-5 h-5 text-brand-600"></i> Famous Attractions
           </h2>
-          <p class="text-xs text-slate-500 font-medium">Popular locations tailored for Indian travelers</p>
+          <p id="attractionsSubtitle" class="text-xs text-slate-500 font-medium">Top attractions in your chosen destination</p>
         </div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
-        
-        <!-- Delhi -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=400&q=80" alt="Delhi" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Delhi</p>
-            <span class="text-[10px] text-slate-500">Heritage</span>
-          </div>
-        </div>
-
-        <!-- Mumbai -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=400&q=80" alt="Mumbai" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Mumbai</p>
-            <span class="text-[10px] text-slate-500">Coastal</span>
-          </div>
-        </div>
-
-        <!-- Bengaluru -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=400&q=80" alt="Bengaluru" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Bengaluru</p>
-            <span class="text-[10px] text-slate-500">Gardens</span>
-          </div>
-        </div>
-
-        <!-- Kolkata -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=400&q=80" alt="Kolkata" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Kolkata</p>
-            <span class="text-[10px] text-slate-500">Culture</span>
-          </div>
-        </div>
-
-        <!-- Chennai -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=400&q=80" alt="Chennai" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Chennai</p>
-            <span class="text-[10px] text-slate-500">Temples</span>
-          </div>
-        </div>
-
-        <!-- Hyderabad -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=400&q=80" alt="Hyderabad" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Hyderabad</p>
-            <span class="text-[10px] text-slate-500">Royalty</span>
-          </div>
-        </div>
-
-        <!-- Ahmedabad -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=400&q=80" alt="Ahmedabad" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Ahmedabad</p>
-            <span class="text-[10px] text-slate-500">Heritage</span>
-          </div>
-        </div>
-
-        <!-- Pune -->
-        <div class="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition">
-          <div class="h-24 w-full overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=400&q=80" alt="Pune" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-          </div>
-          <div class="p-2.5 text-center">
-            <p class="text-xs font-bold text-slate-800">Pune</p>
-            <span class="text-[10px] text-slate-500">Forts & Arts</span>
-          </div>
-        </div>
-
+      <div id="attractionsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4">
+        <!-- Dynamically populated via JS with famous attractions -->
       </div>
     </section>
 
   </main>
+
+  <!-- Budget Alert Modal Popup (Hidden by default) -->
+  <div id="budgetAlertModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-xl space-y-4 transform transition-all">
+      <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-slate-800">Budget Limit Warning</h3>
+        <p id="budgetAlertMessage" class="text-xs text-slate-600 mt-2 leading-relaxed">
+          You have reached over 75% of your total budget with this new expense.
+        </p>
+      </div>
+      <button id="closeAlertBtn" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium text-xs py-2.5 rounded-xl transition shadow-sm">
+        I Understand
+      </button>
+    </div>
+  </div>
 
   <script>
     const CITY_DATABASE = {
@@ -327,7 +257,6 @@
         { name: "National Museum", entry: 20, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Discover over 200,000 historic treasures ranging from Harappan bronze to Buddhist relics." },
         { name: "Agrasen ki Baoli", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Descend into a fascinating 108-step historic stepwell hidden in Connaught Place." },
         { name: "Garden of Five Senses", entry: 35, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Relax in a 20-acre sensory park featuring bamboo courts and fragrant flower gardens." },
-        // 10 Added Places:
         { name: "National Gallery of Modern Art", entry: 20, img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500&auto=format&fit=crop", desc: "View premier collections of modern Indian painting, sculptures, and installations." },
         { name: "Crafts Museum Pragati Maidan", entry: 20, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop", desc: "Explore rural village huts, live artisan demonstrations, and rare traditional crafts." },
         { name: "Sunder Nursery Heritage Park", entry: 50, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "A restored 90-acre Mughal-era heritage park boasting 6 UNESCO World Heritage monuments." },
@@ -352,7 +281,6 @@
         { name: "Colaba Causeway Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Bargain for vintage jewelry, handicrafts, and clothes on South Mumbai's shopping strip." },
         { name: "Global Vipassana Pagoda", entry: 0, img: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=500&auto=format&fit=crop", desc: "World's largest pillarless stone dome built in Gorai for meditation and peace." },
         { name: "Taraporewala Aquarium", entry: 60, img: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?w=500&auto=format&fit=crop", desc: "Historic marine aquarium featuring a 180-degree glass acrylic tunnel." },
-        // 10 Added Places:
         { name: "Jehangir Art Gallery", entry: 0, img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500&auto=format&fit=crop", desc: "Premieres leading modern contemporary Indian art exhibitions in Kala Ghoda." },
         { name: "Chor Bazaar Antique Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Hunt through legendary vintage flea markets for antique clocks, gramophones, and trinkets." },
         { name: "Babulnath Temple", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "Ascend 180 stone steps to an ancient 12th-century hill temple dedicated to Lord Shiva." },
@@ -377,7 +305,6 @@
         { name: "HAL Aerospace Museum", entry: 50, img: "https://images.unsplash.com/photo-1519074069444-1ba4efe96836?w=500&auto=format&fit=crop", desc: "Retired IAF fighter jets, helicopters, commercial aircraft, and simulators." },
         { name: "Commercial Street Shopping", entry: 0, img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop", desc: "Lanes filled with silk sarees, silver jewelry, and vibrant textile shops." },
         { name: "Nandi Hills Sunset Point", entry: 20, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "Drive up winding hill roads 4,800 feet above sea level for cloudscapes." },
-        // 10 Added Places:
         { name: "Jawaharlal Nehru Planetarium", entry: 75, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Immersive space exploration shows and outdoor interactive science park." },
         { name: "St. Mary's Basilica Shivajinagar", entry: 0, img: "https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=500&auto=format&fit=crop", desc: "Gothic style basilica built in 1882 featuring stained glass windows." },
         { name: "National Gallery of Modern Art", entry: 20, img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500&auto=format&fit=crop", desc: "Colonial heritage mansion displaying Indian master art amidst quiet garden paths." },
@@ -402,7 +329,6 @@
         { name: "Belur Math", entry: 0, img: "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=500&auto=format&fit=crop", desc: "Headquarters of Ramakrishna Math, unifying Christian, Islamic, and Hindu motifs." },
         { name: "Eco Park New Town", entry: 30, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", desc: "480-acre park featuring life-sized replicas of Seven Wonders of the World." },
         { name: "Science City Kolkata", entry: 60, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Space Odyssey theaters, ropeway rides, and motion simulators." },
-        // 10 Added Places:
         { name: "Marble Palace Mansion", entry: 0, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "1835 palatial mansion filled with marble walls, European statues, and paintings." },
         { name: "Jorasanko Thakurbari", entry: 20, img: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=500&auto=format&fit=crop", desc: "Ancestral home of Nobel laureate Rabindranath Tagore, now a cultural museum." },
         { name: "Acharya Jagadish Chandra Bose Botanical Garden", entry: 50, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Home to the famous 250-year-old Great Banyan Tree in Shibpur." },
@@ -427,7 +353,6 @@
         { name: "Valluvar Kottam", entry: 20, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "39-meter granite temple chariot monument honoring Tamil poet Thiruvalluvar." },
         { name: "MGR Film City", entry: 50, img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop", desc: "Outdoor film sets and studio backlots used across South Indian cinema." },
         { name: "Covelong Beach Surfing Point", entry: 0, img: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=500&auto=format&fit=crop", desc: "Fishing village famous for sandy beaches, surf schools, and coastal seafood." },
-        // 10 Added Places:
         { name: "Mahabalipuram Shore Temple & Reliefs", entry: 40, img: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&auto=format&fit=crop", desc: "7th-century UNESCO rock cut shore temples and Arjuna's Penance bass-relief." },
         { name: "Arignar Anna Zoological Park (Vandalur)", entry: 50, img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=500&auto=format&fit=crop", desc: "Sprawling 1,500-acre flora and fauna safari park south of Chennai." },
         { name: "Parthasarathy Temple Triplicane", entry: 0, img: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?w=500&auto=format&fit=crop", desc: "8th-century Vaishnavite temple featuring complex granite carved pillars." },
@@ -452,7 +377,6 @@
         { name: "Lumbini Park", entry: 20, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", desc: "Relaxed evening lakefront walks and 3D laser light water shows." },
         { name: "NTR Gardens", entry: 20, img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&auto=format&fit=crop", desc: "Ride a mini monorail and explore giant insect sculptures near the waterfront." },
         { name: "Shilparamam Arts Village", entry: 60, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Traditional crafts village in HITEC City showcasing rural Indian art and folk dance." },
-        // 10 Added Places:
         { name: "Faluknama Palace Heritage View", entry: 0, img: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?w=500&auto=format&fit=crop", desc: "Marvel at the Nizam's hilltop scorpion-shaped Italian marble palace palace exterior." },
         { name: "Sudha Cars Museum", entry: 50, img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&auto=format&fit=crop", desc: "Quirky handmade museum of drivable cars shaped like shoes, cameras, and toilets." },
         { name: "Taramati Baradari", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Historic acoustic music pavilion built atop a hill near Golconda for royal singers." },
@@ -477,7 +401,6 @@
         { name: "Manek Chowk Night Food Market", entry: 0, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop", desc: "Jewelry market by day transforming into a bustling midnight street food bazaar." },
         { name: "Science City Ahmedabad", entry: 50, img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop", desc: "Robotics gallery, aquatic kingdom aquarium, and IMAX 3D space theaters." },
         { name: "Law Garden Night Market", entry: 0, img: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&auto=format&fit=crop", desc: "Street markets brimming with Gujarati traditional Chaniya Cholis and mirror work." },
-        // 10 Added Places:
         { name: "Bhadra Fort & Teen Darwaza", entry: 10, img: "https://images.unsplash.com/photo-1597040639427-419165365a49?w=500&auto=format&fit=crop", desc: "Royal 1411 fort complex and triple arched stone entry gate to the walled city." },
         { name: "Dada Harir Stepwell", entry: 0, img: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=500&auto=format&fit=crop", desc: "Intricately carved 1499 stepwell built in Asarwa with Arabic inscriptions." },
         { name: "Sarkhej Roza Heritage Complex", entry: 0, img: "https://images.unsplash.com/photo-1592639296346-560c37a0f711?w=500&auto=format&fit=crop", desc: "Elegant Sufi tomb complex surrounding a central water tank, called the Acropolis of Ahmedabad." },
@@ -502,7 +425,6 @@
         { name: "Fergusson College Road Cafes", entry: 0, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&auto=format&fit=crop", desc: "Student hangout hub packed with iconic bakeries, cafes, and bookstalls." },
         { name: "Khadakwasla Dam Backwaters", entry: 0, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&auto=format&fit=crop", desc: "Scenic lakeside picnic destination serving roasted corn and hot bhajiyas." },
         { name: "Pu La Deshpande Japanese Garden", entry: 20, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=500&auto=format&fit=crop", desc: "Modeled after Okayama Korakuen Garden, featuring wooden bridges and fish ponds." },
-        // 10 Added Places:
         { name: "Lohagad Fort & Bhaja Caves", entry: 50, img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=500&auto=format&fit=crop", desc: "Iron fortress perched 3,400 feet up near ancient 2nd-century BC Buddhist rock caves." },
         { name: "National War Museum Pune", entry: 0, img: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500&auto=format&fit=crop", desc: "Patriotic memorial displaying MiG-23 fighter jets, tanks, and naval armaments." },
         { name: "Vetal Tekdi Hilltop Walk", entry: 0, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop", desc: "Highest elevation point in Pune city limits, perfect for sunrise hikes." },
@@ -552,10 +474,56 @@
       const progressBar = document.getElementById('progressBar');
       const progressPercent = document.getElementById('progressPercent');
 
+      // Modal Elements
+      const budgetAlertModal = document.getElementById('budgetAlertModal');
+      const budgetAlertMessage = document.getElementById('budgetAlertMessage');
+      const closeAlertBtn = document.getElementById('closeAlertBtn');
+
       if (userDisplayName) userDisplayName.textContent = activeUser;
       if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
 
-      // Dynamic Non-Repeating Multi-Day Generator with expanded pool
+      // Close modal listener
+      closeAlertBtn.addEventListener('click', () => {
+        budgetAlertModal.classList.add('hidden');
+      });
+
+      // Render Famous Attractions from User Entered City
+      function renderAttractions() {
+        const attractionsGrid = document.getElementById('attractionsGrid');
+        const attractionsSubtitle = document.getElementById('attractionsSubtitle');
+        
+        const city = (userProfile && userProfile.destination) ? userProfile.destination : 'Delhi';
+        const attractions = CITY_DATABASE[city] || CITY_DATABASE["Delhi"];
+
+        if (attractionsSubtitle) {
+          attractionsSubtitle.textContent = `Famous attractions and top landmarks in ${city}`;
+        }
+
+        if (attractionsGrid) {
+          attractionsGrid.innerHTML = '';
+          
+          // Display up to 8 top attractions from the city
+          const itemsToDisplay = attractions.slice(0, 8);
+          
+          itemsToDisplay.forEach(item => {
+            const entryText = item.entry === 0 ? "Free" : `\u20B9${item.entry}`;
+            const card = document.createElement('div');
+            card.className = 'group flex flex-col justify-between overflow-hidden rounded-xl border border-slate-100 bg-slate-50 shadow-sm hover:shadow-md transition';
+            card.innerHTML = `
+              <div class="h-24 w-full overflow-hidden">
+                <img src="${item.img}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&auto=format&fit=crop'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
+              </div>
+              <div class="p-2.5 text-center flex-1 flex flex-col justify-between">
+                <p class="text-xs font-bold text-slate-800 leading-tight mb-1" title="${item.name}">${item.name}</p>
+                <span class="text-[10px] font-semibold text-brand-600 block">${entryText}</span>
+              </div>
+            `;
+            attractionsGrid.appendChild(card);
+          });
+        }
+      }
+
+      // Dynamic Non-Repeating Multi-Day Generator
       function renderItinerary() {
         const itinerarySection = document.getElementById('itinerarySection');
         const itineraryCardsGrid = document.getElementById('itineraryCardsGrid');
@@ -733,6 +701,12 @@
         const parsedAmount = parseFloat(amountInput.value);
         if (isNaN(parsedAmount) || parsedAmount <= 0) return;
 
+        // Calculate pre-add and post-add budget percentages
+        const currentSpent = expenses.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+        const currentPct = budget > 0 ? (currentSpent / budget) * 100 : 0;
+        const newSpent = currentSpent + parsedAmount;
+        const newPct = budget > 0 ? (newSpent / budget) * 100 : 0;
+
         const newExpense = {
           id: Date.now().toString(),
           desc: descInput.value.trim(),
@@ -743,6 +717,12 @@
 
         expenses.unshift(newExpense);
         saveState();
+
+        // Trigger Modal popup ONLY when crossing the 75% budget mark via adding an expense
+        if (budget > 0 && currentPct < 75 && newPct >= 75) {
+          budgetAlertMessage.textContent = `Warning! Adding this expense brought your budget utilization to ${newPct.toFixed(1)}%, exceeding the 75% limit.`;
+          budgetAlertModal.classList.remove('hidden');
+        }
 
         descInput.value = '';
         amountInput.value = '';
@@ -769,6 +749,7 @@
         window.location.href = '/';
       });
 
+      renderAttractions();
       renderItinerary();
       render();
     });

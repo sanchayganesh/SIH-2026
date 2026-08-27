@@ -441,9 +441,10 @@
     document.addEventListener('DOMContentLoaded', () => {
       const activeUser = localStorage.getItem('active_user');
 
+      // Updated: Redirect to root / instead of index.html
       if (!activeUser) {
         alert('No active session found. Redirecting to user setup...');
-        window.location.href = '/';
+        window.location.replace('/');
         return;
       }
 
@@ -744,9 +745,10 @@
         }
       });
 
+      // Updated: Switch User button redirects directly to root /
       switchUserBtn.addEventListener('click', () => {
         localStorage.removeItem('active_user');
-        window.location.href = '/';
+        window.location.replace('/');
       });
 
       renderAttractions();

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker Authentication & Setup</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React & React-DOM CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-[#b2ede8] via-[#8ae3db] to-[#60d6cb] text-slate-800 font-sans antialiased">
+  <div id="root"></div>
+
+  <script>
+    const { useState, useEffect, createElement: h } = React;
+
+    function ExpenseTrackerSetup() {
+      // Step 1: Auth View, Step 2: Trip Details Input
+      const [step, setStep] = useState(1);
+      
+      // Active Auth Sub-Tab ('signin' or 'signup')
+      const [authTab, setAuthTab] = useState('signin');
+      
+      // Error & Success Alerts
+      const [errorMessage, setErrorMessage] = useState('');
+      const [successMessage, setSuccessMessage] = useState('');
+
+      // Auth Credentials Form State
+      const [authData, setAuthData] = useState({
+        username: '',
+        password: '',
+        confirmPassword: '',
+        remember: true
+      });
+
+      // Trip Details State
+      const [tripData, setTripData] = useState({
+        mobile: '',
+        members: 1,
+        destination: '',
+        budget: '',
+        dateFrom: '',
+        dateTo: '',
+        wantItinerary: true
+      });
+
+      useEffect(() => {
+        // Retrieve saved user credentials on load for Sign In
+        const rememberedUser = localStorage.getItem('remembered_user');
+
+        if (rememberedUser) {
+          const savedCreds = localStorage.getItem(`auth_${rememberedUser}`);
+          if (savedCreds) {
+            try {
+              const { username, password } = JSON.parse(savedCreds);
+              setAuthData(prev => ({ 
+                ...prev, 
+                username: username || rememberedUser, 
+                password: password || '', 
+                remember: true 
+              }));
+            } catch (e) {
+              setAuthData(prev => ({ ...prev, username: rememberedUser, remember: true }));
+            }
+          }
+        }
+      }, []);
+
+      // Switch auth tabs and clear input fields when switching to Sign Up
+      const switchTab = (tab) => {
+        setAuthTab(tab);
+        setErrorMessage('');
+        setSuccessMessage('');
+        
+        if (tab === 'signup') {
+          // Clear form fields completely for new registration
+          setAuthData({
+            username: '',
+            password: '',
+            confirmPassword: '',
+            remember: false
+          });
+        }
+      };
+
+      const loadUserPreferences = (name) => {
+        if (!name) return;
+        const savedData = localStorage.getItem(`user_${name}`);
+        if (savedData) {
+          try {
+            const profile = JSON.parse(savedData);
+            setTripData({
+              mobile: profile.mobile || '',
+              members: profile.members || 1,
+              destination: profile.destination || '',
+              budget: profile.budget || '',
+              dateFrom: profile.startDate || '',
+              dateTo: profile.endDate || '',
+              wantItinerary: profile.wantItinerary !== undefined ? profile.wantItinerary : true
+            });
+          } catch (e) {
+            console.error("Error parsing profile", e);
+          }
+        }
+      };
+
+      const handleAuthChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setErrorMessage('');
+        setSuccessMessage('');
+        setAuthData(prev => ({
+          ...prev,
+          [name]: type === 'checkbox' ? checked : value
+        }));
+      };
+
+      const handleTripChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setTripData(prev => ({
+          ...prev,
+          [name]: type === 'checkbox' ? checked : value
+        }));
+      };
+
+      // Handler for Existing Users Signing In
+      const handleSignInSubmit = (e) => {
+        e.preventDefault();
+        const username = authData.username.trim();
+        const password = authData.password;
+
+        if (!username || !password) {
+          setErrorMessage('Please enter both username and password.');
+          return;
+        }
+
+        const existingAuth = localStorage.getItem(`auth_${username}`);
+        
+        if (!existingAuth) {
+          setErrorMessage('User does not exist. Please sign up first.');
+          return;
+        }
+
+        try {
+          const creds = JSON.parse(existingAuth);
+          if (creds.password !== password) {
+            setErrorMessage('Incorrect password');
+            return;
+          }
+        } catch (err) {
+          setErrorMessage('Authentication error. Please try again.');
+          return;
+        }
+
+        // Save session & remember status
+        localStorage.setItem('active_user', username);
+        if (authData.remember) {
+          localStorage.setItem('remembered_user', username);
+          localStorage.setItem(`auth_${username}`, JSON.stringify({ username, password }));
+        } else {
+          localStorage.removeItem('remembered_user');
+        }
+
+        setErrorMessage('');
+        loadUserPreferences(username);
+        setStep(2);
+      };
+
+      // Handler for New Users Registering
+      const handleSignUpSubmit = (e) => {
+        e.preventDefault();
+        const username = authData.username.trim();
+        const password = authData.password;
+        const confirmPassword = authData.confirmPassword;
+
+        if (!username || !password || !confirmPassword) {
+          setErrorMessage('Please fill in all required fields.');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          setErrorMessage('Passwords do not match.');
+          return;
+        }
+
+        const existingAuth = localStorage.getItem(`auth_${username}`);
+        if (existingAuth) {
+          setErrorMessage('Username already exists. Please sign in instead.');
+          return;
+        }
+
+        // Save new user account details
+        localStorage.setItem(`auth_${username}`, JSON.stringify({ username, password }));
+        
+        setSuccessMessage('Account created successfully! You can now sign in.');
+        setErrorMessage('');
+        
+        // Reset fields and switch to Sign In tab
+        setAuthData({ username: '', password: '', confirmPassword: '', remember: true });
+        setAuthTab('signin');
+      };
+
+      // Handler for Trip Details Form
+      const handleTripSubmit = (e) => {
+        e.preventDefault();
+        const username = authData.username.trim();
+        const budgetNum = parseFloat(tripData.budget) || 0;
+        const membersNum = parseInt(tripData.members) || 1;
+
+        let days = 1;
+        if (tripData.dateFrom && tripData.dateTo) {
+          const start = new Date(tripData.dateFrom);
+          const end = new Date(tripData.dateTo);
+          if (end >= start) {
+            const diffTime = Math.abs(end - start);
+            days = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+          }
+        }
+
+        const userProfile = {
+          name: username,
+          mobile: tripData.mobile.trim(),
+          destination: tripData.destination,
+          budget: budgetNum,
+          members: membersNum,
+          days: days,
+          startDate: tripData.dateFrom,
+          endDate: tripData.dateTo,
+          wantItinerary: tripData.wantItinerary
+        };
+
+        localStorage.setItem(`user_${username}`, JSON.stringify(userProfile));
+        
+        localStorage.setItem('travel_budget', budgetNum);
+        localStorage.setItem('travel_destination', tripData.destination);
+        localStorage.setItem('travel_members', membersNum);
+        localStorage.setItem('travel_days', days);
+        localStorage.setItem('want_itinerary', tripData.wantItinerary ? 'yes' : 'no');
+
+        // Redirect to dashboard page
+        window.location.href = './index2.html';
+      };
+
+      return h('div', { className: 'min-h-screen flex flex-col justify-between pb-12' },
+        // Header
+        h('header', { className: 'w-full px-12 py-6 flex justify-between items-center text-[#1a2b3c]' },
+          h('h1', { className: 'text-lg font-black tracking-widest uppercase' }, 'EXPENSE TRACKER'),
+          h('nav', { className: 'flex space-x-8 text-xs font-bold tracking-widest uppercase' },
+            h('a', { href: '#home', className: 'hover:opacity-75 transition' }, 'HOME'),
+            h('a', { href: '#contact', className: 'hover:opacity-75 transition' }, 'CONTACT US')
+          )
+        ),
+
+        // Main Card
+        h('main', { className: 'max-w-2xl w-full mx-auto px-4 mt-2 mb-8' },
+          h('div', { className: 'bg-[#e9f8f7]/90 backdrop-blur-md rounded-3xl shadow-2xl p-8 sm:p-10 border border-white/50 text-center' },
+            
+            // STEP 1: AUTHENTICATION (SIGN IN & SIGN UP)
+            step === 1 && h('div', null,
+              
+              // Sign In / Sign Up Toggle Tabs
+              h('div', { className: 'flex justify-center border-b border-[#c1ebe6] mb-8 max-w-md mx-auto' },
+                h('button', {
+                  type: 'button',
+                  onClick: () => switchTab('signin'),
+                  className: `pb-3 px-6 text-xs font-bold uppercase tracking-wider transition-all border-b-2 ${authTab === 'signin' ? 'border-[#3ebcb0] text-[#1f3031]' : 'border-transparent text-[#628b8c] hover:text-[#1f3031]'}`
+                }, 'Sign In'),
+                h('button', {
+                  type: 'button',
+                  onClick: () => switchTab('signup'),
+                  className: `pb-3 px-6 text-xs font-bold uppercase tracking-wider transition-all border-b-2 ${authTab === 'signup' ? 'border-[#3ebcb0] text-[#1f3031]' : 'border-transparent text-[#628b8c] hover:text-[#1f3031]'}`
+                }, 'Sign Up (New User)')
+              ),
+
+              // Title Section
+              h('div', { className: 'mb-8' },
+                h('p', { className: 'text-[11px] font-bold tracking-widest text-[#3d5a5b] uppercase mb-2' }, authTab === 'signin' ? 'WELCOME BACK' : 'CREATE AN ACCOUNT'),
+                h('h2', { className: 'text-2xl font-bold text-[#1f3031] tracking-tight mb-2' }, authTab === 'signin' ? 'Sign In to Your Account' : 'New User Registration'),
+                h('p', { className: 'text-xs font-medium text-[#4a6b6c]' }, authTab === 'signin' ? 'Enter your credentials to manage your travel plan.' : 'Create your credentials to start planning your journeys.')
+              ),
+
+              // Error Banner
+              errorMessage && h('div', { 
+                className: 'mb-6 p-3 rounded-2xl bg-red-100 border border-red-300 text-red-700 text-xs font-semibold text-center' 
+              }, errorMessage),
+
+              // Success Banner
+              successMessage && h('div', { 
+                className: 'mb-6 p-3 rounded-2xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-semibold text-center' 
+              }, successMessage),
+
+              // SIGN IN FORM
+              authTab === 'signin' && h('form', { onSubmit: handleSignInSubmit, className: 'space-y-6 text-left max-w-md mx-auto', autoComplete: 'on' },
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'USERNAME'),
+                  h('input', {
+                    type: 'text',
+                    name: 'username',
+                    required: true,
+                    value: authData.username,
+                    onChange: handleAuthChange,
+                    placeholder: 'Enter username',
+                    className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                  })
+                ),
+
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'PASSWORD'),
+                  h('input', {
+                    type: 'password',
+                    name: 'password',
+                    required: true,
+                    value: authData.password,
+                    onChange: handleAuthChange,
+                    placeholder: 'Enter password',
+                    className: `w-full px-5 py-3 rounded-2xl border ${errorMessage === 'Incorrect password' ? 'border-red-400 focus:border-red-500' : 'border-[#c1ebe6] focus:border-[#42c5b8]'} focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm`
+                  })
+                ),
+
+                h('div', { className: 'flex items-center justify-between px-1' },
+                  h('label', { className: 'flex items-center space-x-2 text-xs font-semibold text-[#2e4748] cursor-pointer' },
+                    h('input', {
+                      type: 'checkbox',
+                      name: 'remember',
+                      checked: authData.remember,
+                      onChange: handleAuthChange,
+                      className: 'rounded text-[#3ebcb0] focus:ring-0 w-4 h-4'
+                    }),
+                    h('span', null, 'Remember me')
+                  )
+                ),
+
+                h('button', {
+                  type: 'submit',
+                  className: 'w-full mt-6 bg-[#1a2332] hover:bg-[#111827] text-white font-semibold py-3.5 rounded-2xl transition duration-200 shadow-md flex items-center justify-center gap-2 text-sm'
+                },
+                  h('span', null, 'Sign In'),
+                  h('svg', { className: 'w-4 h-4', fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' },
+                    h('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2', d: 'M14 5l7 7m0 0l-7 7m7-7H3' })
+                  )
+                )
+              ),
+
+              // SIGN UP FORM (NEW USER - CLEARED STATE & AUTOCOMPLETE OFF)
+              authTab === 'signup' && h('form', { onSubmit: handleSignUpSubmit, className: 'space-y-6 text-left max-w-md mx-auto', autoComplete: 'off' },
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'USERNAME'),
+                  h('input', {
+                    type: 'text',
+                    name: 'username',
+                    required: true,
+                    autoComplete: 'off',
+                    value: authData.username,
+                    onChange: handleAuthChange,
+                    placeholder: 'Choose a username',
+                    className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                  })
+                ),
+
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'ENTER PASSWORD'),
+                  h('input', {
+                    type: 'password',
+                    name: 'password',
+                    required: true,
+                    autoComplete: 'new-password',
+                    value: authData.password,
+                    onChange: handleAuthChange,
+                    placeholder: 'Enter new password',
+                    className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                  })
+                ),
+
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'CONFIRM PASSWORD'),
+                  h('input', {
+                    type: 'password',
+                    name: 'confirmPassword',
+                    required: true,
+                    autoComplete: 'new-password',
+                    value: authData.confirmPassword,
+                    onChange: handleAuthChange,
+                    placeholder: 'Confirm new password',
+                    className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                  })
+                ),
+
+                h('button', {
+                  type: 'submit',
+                  className: 'w-full mt-6 bg-[#1a2332] hover:bg-[#111827] text-white font-semibold py-3.5 rounded-2xl transition duration-200 shadow-md flex items-center justify-center gap-2 text-sm'
+                },
+                  h('span', null, 'Register Account'),
+                  h('svg', { className: 'w-4 h-4', fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' },
+                    h('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2', d: 'M14 5l7 7m0 0l-7 7m7-7H3' })
+                  )
+                )
+              )
+            ),
+
+            // STEP 2: TRIP DETAILS & ITINERARY INPUT FORM
+            step === 2 && h('div', null,
+              h('div', { className: 'mb-8' },
+                h('p', { className: 'text-[11px] font-bold tracking-widest text-[#3d5a5b] uppercase mb-2' }, `LOGGED IN AS ${authData.username.toUpperCase()}`),
+                h('h2', { className: 'text-2xl font-bold text-[#1f3031] tracking-tight mb-2' }, 'Plan Your Journey'),
+                h('p', { className: 'text-xs font-medium text-[#4a6b6c]' }, 'Enter destination dates and budget details to build your itinerary.')
+              ),
+
+              h('form', { onSubmit: handleTripSubmit, className: 'space-y-6 text-left max-w-xl mx-auto' },
+                
+                // Mobile Number
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'MOBILE NUMBER'),
+                  h('input', {
+                    type: 'text',
+                    name: 'mobile',
+                    value: tripData.mobile,
+                    onChange: handleTripChange,
+                    placeholder: 'Enter mobile number',
+                    className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                  })
+                ),
+
+                // Members & Destination Row
+                h('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-4' },
+                  h('div', null,
+                    h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'NUMBER OF MEMBERS'),
+                    h('input', {
+                      type: 'number',
+                      name: 'members',
+                      min: '1',
+                      required: true,
+                      value: tripData.members,
+                      onChange: handleTripChange,
+                      className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                    })
+                  ),
+                  h('div', null,
+                    h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'DESTINATION'),
+                    h('select', {
+                      name: 'destination',
+                      required: true,
+                      value: tripData.destination,
+                      onChange: handleTripChange,
+                      className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm appearance-none'
+                    },
+                      h('option', { value: '', disabled: true }, 'Select Destination'),
+                      ['Mumbai', 'Delhi', 'Bengaluru', 'Kolkata', 'Chennai', 'Hyderabad', 'Ahmedabad', 'Pune'].map(city =>
+                        h('option', { key: city, value: city }, city)
+                      )
+                    )
+                  )
+                ),
+
+                // Budget of Trip
+                h('div', null,
+                  h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'BUDGET OF TRIP (₹)'),
+                  h('div', { className: 'relative' },
+                    h('span', { className: 'absolute left-5 top-1/2 -translate-y-1/2 text-sm text-[#506e70] font-medium' }, '₹'),
+                    h('input', {
+                      type: 'number',
+                      name: 'budget',
+                      step: '0.01',
+                      min: '0',
+                      required: true,
+                      value: tripData.budget,
+                      onChange: handleTripChange,
+                      className: 'w-full pl-10 pr-5 py-3 rounded-2xl border-2 border-[#54d2c5] focus:outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm'
+                    })
+                  )
+                ),
+
+                // Date Range Row (From & To)
+                h('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-4' },
+                  h('div', null,
+                    h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'FROM'),
+                    h('input', {
+                      type: 'date',
+                      name: 'dateFrom',
+                      required: true,
+                      value: tripData.dateFrom,
+                      onChange: handleTripChange,
+                      className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm text-center'
+                    })
+                  ),
+                  h('div', null,
+                    h('label', { className: 'block text-center text-[11px] font-bold uppercase tracking-wider text-[#2e4748] mb-2' }, 'TO'),
+                    h('input', {
+                      type: 'date',
+                      name: 'dateTo',
+                      required: true,
+                      value: tripData.dateTo,
+                      onChange: handleTripChange,
+                      className: 'w-full px-5 py-3 rounded-2xl border border-[#c1ebe6] focus:border-[#42c5b8] focus:ring-0 outline-none text-sm text-[#2c3e50] bg-white transition shadow-sm text-center'
+                    })
+                  )
+                ),
+
+                // Travel Itinerary Toggle Box
+                h('div', { className: 'bg-[#d5f3f0] p-4 rounded-2xl flex items-center justify-between mt-4' },
+                  h('div', null,
+                    h('p', { className: 'text-[11px] font-bold uppercase tracking-wider text-[#213a3b]' }, 'DO YOU ALSO WANT TRAVEL ITINERARY?'),
+                    h('p', { className: 'text-[11px] text-[#4b7677] font-medium mt-0.5' }, tripData.wantItinerary ? 'Yes' : 'No')
+                  ),
+                  h('button', {
+                    type: 'button',
+                    onClick: () => setTripData(prev => ({ ...prev, wantItinerary: !prev.wantItinerary })),
+                    className: `w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${tripData.wantItinerary ? 'bg-[#3ebcb0]' : 'bg-slate-300'}`
+                  },
+                    h('div', {
+                      className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${tripData.wantItinerary ? 'translate-x-6' : 'translate-x-0'}`
+                    })
+                  )
+                ),
+
+                // Buttons
+                h('div', { className: 'flex gap-3 mt-6' },
+                  h('button', {
+                    type: 'button',
+                    onClick: () => setStep(1),
+                    className: 'w-1/3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-3.5 rounded-2xl transition duration-200 text-sm'
+                  }, 'Back'),
+                  h('button', {
+                    type: 'submit',
+                    className: 'w-2/3 bg-[#1a2332] hover:bg-[#111827] text-white font-semibold py-3.5 rounded-2xl transition duration-200 shadow-md flex items-center justify-center gap-2 text-sm'
+                  },
+                    h('span', null, 'Submit & View Itinerary'),
+                    h('svg', { className: 'w-4 h-4', fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' },
+                      h('path', { strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2', d: 'M14 5l7 7m0 0l-7 7m7-7H3' })
+                    )
+                  )
+                )
+              )
+            )
+
+          )
+        )
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(h(ExpenseTrackerSetup));
+  </script>
+</body>
+</html>
